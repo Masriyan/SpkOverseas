@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>MAP | SPK</title>
+
+    <th:block th:include="fragments/menu.html::main-style">
+    </th:block>
+
+    <!-- DataTables -->
+    <link rel="stylesheet" th:href="@{/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css}">
+
+    <!-- Custom List Of SPK Style -->
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+    <div class="wrapper">
+        <th:block th:insert="fragments/menu.html::header-menu">
+        </th:block>
+        <th:block th:insert="fragments/menu.html::left-side-menu">
+        </th:block>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Main Content -->
+            <section class="content">
+
+                <div class="row">
+                    <div class="col-lg-3 col-xs-6">
+                        <div class="small-box bg-aqua">
+                            <div class="inner">
+                                <h3 th:text="${totalSpk}">150</h3>
+
+                                <p>SPK pending on you</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-document-text"></i>
+                            </div>
+                            <a class="small-box-footer" id="more-info" onclick="goToListOfSpk();">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Number of SPK on Process Grouped By Company</h3>
+                            </div>
+                            <div class="box-body">
+                                <div class="chart">
+                                    <canvas id="spkOnProgressChart" style="height: 230px; width: 510px;" height="230" width="510"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.Chart -->
+
+                <!-- List of SPK pending on user -->
+                <div class="row" id="list-of-spk">
+                    <div class="col-md-12">
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">
+                                    Take action on below SPK
+                                </h3>
+                            </div>
+                            <div class="box-body">
+                                <table class="table table-bordered table-hover dataTable" id="table-spk">
+                                    <thead>
+                                        <tr>
+                                            <th>SPK Id</th>
+                                            <th>Description</th>
+                                            <th>Company</th>
+                                            <th>Store</th>
+                                            <th>Vendor</th>
+                                            <th>Asset Number</th>
+                                            <th>Internal Order</th>
+                                            <th>Purchase Order</th>
+                                            <th>Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="spk: ${listOfSpk}">
+                                            <td th:text="${spk.spkId}">spkId</td>
+                                            <td th:text="${spk.spkDescription}">Description</td>
+                                            <td th:text="${spk.companyId}">Company Id</td>
+                                            <td th:text="${spk.storeId}">Store Id</td>
+                                            <td th:text="${spk.vendorId}">vendorId</td>
+                                            <td th:text="${spk.assetNo}">assetNo</td>
+                                            <td th:text="${spk.internalOrder}">internal Order</td>
+                                            <td th:text="${spk.purchaseOrder}">Purchase Order</td>
+                                            <td th:text="${@textFormatter.toRupiahFormat(spk.amount)}"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.List of SPK pending on user -->
+            </section>
+            <!-- /.Main Content -->
+        </div>
+        <!--/.content-wrapper -->
+
+        <th:block th:insert="fragments/footer.html::footer">
+        </th:block>
+    </div>
+
+    <th:block th:include="fragments/footer.html::main-scripts">
+    </th:block>
+
+    <!-- DataTables -->
+    <script th:src="@{/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
+
+    <!-- ChartJS -->
+    <script th:src="@{/bower_components/chart.js/Chart.js}"></script>
+
+    <!-- Index Script -->
+    <script th:src="@{/scripts/index.js}"></script>
+</body>
+</html>

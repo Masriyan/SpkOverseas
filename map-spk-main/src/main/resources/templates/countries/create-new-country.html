@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>SPK | Create New Country</title>
+
+    <!-- Sweet Alert 2 -->
+    <link rel="stylesheet" th:href="@{/sweet_alert2/sweetalert2.min.css}">
+
+    <th:block th:include="fragments/menu.html::main-style">
+    </th:block>
+
+    <!-- Custom Create New User Style -->
+    <link rel="stylesheet" th:href="@{/css/countries/create-new-country.css}">
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+<div class="wrapper">
+    <th:block th:insert="fragments/menu.html::header-menu">
+    </th:block>
+    <th:block th:insert="fragments/menu.html::left-side-menu">
+    </th:block>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Main Content -->
+        <section class="content">
+            <div class="box box-default">
+                <form onsubmit="return onSubmitCountry();">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">New Country Form</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-3">
+                                <!-- Country Code -->
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Country Code:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="countryCode" maxlength="10" required>
+                                    </div>
+                                </div>
+                                <!-- /.Country Id -->
+                                <!-- Country Name -->
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Country Name:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="countryName" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <!-- /.Country Name -->
+                                <div style="padding: 10px 0px;
+                                font-weight: bold;
+                                font-size: 20px;">For Print Settings</div>
+                                <!-- Label 1 -->
+                                <div class="form-group">
+                                    <label>
+                                        <span style="color:red;">*</span> Label 1 <span style="color:red;">need to add <strong>@quotation@</strong> , <strong>@desc@</strong> , <strong>@amounttext@</strong> and <strong>@amount@</strong> , <strong>@en@</strong> / <strong>@id@</strong></span>:
+                                        <br>
+                                        <span style="font-size:10px;">Ex : Berdasarkan penawaran harga yang disetujui pada tanggal @quotation@ untuk @desc@ dengan nilai @amount@ (@amounttext@ @en@) tidak termasuk PPN 11% maka:</span>
+                                    </label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label1" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 2:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label2" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 3:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label3" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 4:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label4" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 5:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label5" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 6:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label6" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 7:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label7" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        <span style="color:red;">*</span> Label 8  <span style="color:red;">need to add <strong>@desc@</strong></span>:
+                                        <br>
+                                        <span style="font-size:10px;">Ex : Yang selanjutnya disebut sebagai kontraktor untuk @desc@ dengan perincian sebagai berikut:</span>
+                                    </label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label8" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 9:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label9" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 10:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label10" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 11:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label11" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 12:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label12" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 13:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label13" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 14:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label14" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 15:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label15" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 16:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label16" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 17:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label17" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 18:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label18" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 19:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label19" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 20:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label20" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 21:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label21" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 22:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label22" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 23:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label23" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 24:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label24" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 25:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label25" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 26:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label26" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 27:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label27" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 28:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label28" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 29:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label29" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 30:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label30" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Label 31:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="label31" maxlength="225" required>
+                                    </div>
+                                </div>
+                                <!-- /.Label1 -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <div class="col-md-10 col-md-offset-1">
+                            <button type="submit" class="btn btn-warning pull-right">Submit</button>
+                        </div>
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
+            </div>
+        </section>
+        <!-- /.Main Content -->
+    </div>
+    <!--/.content-wrapper -->
+
+    <th:block th:insert="fragments/footer.html::footer">
+    </th:block>
+</div>
+
+<th:block th:include="fragments/footer.html::main-scripts">
+</th:block>
+
+<!-- Sweet Alert 2 Script -->
+<script th:src="@{/sweet_alert2/sweetalert2.min.js}"></script>
+<!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
+<script th:src="@{/sweet_alert2/sweetalert2_optional.js}"></script>
+
+<!-- Menu Activator script -->
+<script th:src="@{/scripts/utils/menu-activator.js}"></script>
+
+<!-- Create new User script -->
+<script th:src="@{/scripts/countries/create-new-country.js}"></script>
+
+</body>
+</html>

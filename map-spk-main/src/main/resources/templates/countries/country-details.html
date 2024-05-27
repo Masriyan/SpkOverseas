@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>SPK | Sbu Company Details</title>
+    <th:block th:include="fragments/menu.html::main-style"></th:block>
+
+    <!-- Select2 -->
+    <link rel="stylesheet" th:href="@{/bower_components/select2/dist/css/select2.min.css}">
+
+    <!-- Sweet Alert 2 -->
+    <link rel="stylesheet" th:href="@{/sweet_alert2/sweetalert2.min.css}">
+    <link rel="stylesheet" th:href="@{/sweet_alert2/sweetalert2.css}">
+
+    <!-- Custom User Details Style -->
+    <link rel="stylesheet" th:href="@{/css/users/user-details.css}">
+</head>
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+<!--/*@thymesVar id="user" type="id.co.map.spk.entities.AppUserEntity"*/-->
+<!--/*@thymesVar id="companies" type="java.util.List"*/-->
+<!--/*@thymesVar id="company" type="id.co.map.spk.entities.CompanyEntity"*/-->
+<!--/*@thymesVar id="role" type="id.co.map.spk.entities.RoleEntity"*/-->
+<div class="wrapper">
+    <th:block th:insert="fragments/menu.html::header-menu">
+    </th:block>
+    <th:block th:insert="fragments/menu.html::left-side-menu">
+    </th:block>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Main Content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="box box box-primary">
+                        <div class="box-header with-border">
+                            <h3>Country Detail</h3>
+                        </div>
+                        <div class="box-body">
+                            <span style="display:none;" th:text="${countries.CountryId}" id="countryId">awie.susanto</span>
+                            <!-- User Details-->
+                            <div class="user-detail">
+                                <div class="description">
+                                    Country Code
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.CountryCode}" id="countryCode">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeCountryCode()"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Country Name
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.CountryName}" id="countryName">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeCountryName()"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <!-- /.User Details-->
+                            <div class="user-detail">
+                                <div style="font-weight:bold;padding-top:10px;font-size:20px;">For Print Settings</div>
+                            </div>
+
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 1 <span style="color:red;">need to add <strong>@quotation@</strong> , <strong>@desc@</strong> , <strong>@amounttext@</strong> and <strong>@amount@</strong> , <strong>@en@</strong> / <strong>@id@</strong></span>
+                                    <br>
+                                    <span style="font-size:10px;">Ex : Berdasarkan penawaran harga yang disetujui pada tanggal @quotation@ untuk @desc@ dengan nilai @amount@ (@amounttext@ @en@) tidak termasuk PPN 11% maka: </span>
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label1}" id="label1">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label1')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 2
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label2}" id="label2">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label2')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 3
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label3}" id="label3">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label3')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 4
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label4}" id="label4">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label4')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 5
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label5}" id="label5">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label5')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 6
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label6}" id="label6">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label6')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 7
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label7}" id="label7">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label7')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 8 <span style="color:red;">need to add <strong>@desc@</strong></span>
+                                    <br>
+                                    <span style="font-size:10px;">Ex : Yang selanjutnya disebut sebagai kontraktor untuk @desc@ dengan perincian sebagai berikut:</span>
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label8}" id="label8">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label8')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 9
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label9}" id="label9">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label9')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 10
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label10}" id="label10">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label10')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 11
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label11}" id="label11">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label11')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 12
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label12}" id="label12">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label12')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 13
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label13}" id="label13">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label13')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 14
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label14}" id="label14">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label14')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 15
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label15}" id="label15">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label15')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 16
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label16}" id="label16">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label16')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 17
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label17}" id="label17">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label17')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 18
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label18}" id="label18">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label18')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 19
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label19}" id="label19">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label19')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 20
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label20}" id="label20">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label20')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 21
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label21}" id="label21">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label21')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 22
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label22}" id="label22">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label22')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 23
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label23}" id="label23">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label23')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 24
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label24}" id="label24">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label24')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 25
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label25}" id="label25">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label25')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 26
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label26}" id="label26">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label26')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 27
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label27}" id="label27">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label27')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 28
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label28}" id="label28">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label28')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 29
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label29}" id="label29">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label29')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 30
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label30}" id="label30">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label30')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="user-detail">
+                                <div class="description">
+                                    Label 31
+                                </div>
+                                <div class="user-value">
+                                    <span th:text="${countries.label31}" id="label31">awie.susanto</span>
+                                </div>
+                                <div class="edit-action pull-right">
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeLabel('label31')"><i class="fa fa-edit"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /.Main Content -->
+    </div>
+    <!--/.content-wrapper -->
+
+    <th:block th:insert="fragments/footer.html::footer">
+    </th:block>
+</div>
+
+<th:block th:include="fragments/footer.html::main-scripts">
+</th:block>
+
+<!-- Select2 -->
+<script th:src="@{/bower_components/select2/dist/js/select2.full.min.js}"></script>
+
+<!-- Sweet Alert 2 Script -->
+<script th:src="@{/sweet_alert2/sweetalert2.min.js}"></script>
+<!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
+<script th:src="@{/sweet_alert2/sweetalert2_optional.js}"></script>
+
+<!-- User Details script -->
+<script th:src="@{/scripts/countries/country-details.js}"></script>
+</body>
+</html>

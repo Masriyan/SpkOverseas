@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>SPK | Create New User</title>
+
+    <!-- Sweet Alert 2 -->
+    <link rel="stylesheet" th:href="@{/sweet_alert2/sweetalert2.min.css}">
+
+    <!-- Select2 -->
+    <link rel="stylesheet" th:href="@{/bower_components/select2/dist/css/select2.min.css}">
+
+    <th:block th:include="fragments/menu.html::main-style">
+    </th:block>
+
+    <!-- Custom Create New User Style -->
+    <link rel="stylesheet" th:href="@{/css/users/create-new-user.css}">
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+<!--/*@thymesVar id="companies" type="id.co.map.spk.entities.CompanyEntity"*/-->
+<!--/*@thymesVar id="roles" type="id.co.map.spk.entities.RoleEntity"*/-->
+    <div class="wrapper">
+        <th:block th:insert="fragments/menu.html::header-menu">
+        </th:block>
+        <th:block th:insert="fragments/menu.html::left-side-menu">
+        </th:block>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Main Content -->
+            <section class="content">
+                <div class="box box-default">
+                    <form>
+                        <div class="box-header with-border">
+                            <h3 class="box-title">New User Form</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <!-- Username -->
+                                    <div class="form-group">
+                                        <label><span style="color:red;">*</span> Username:</label>
+                                        <div class="input-group date">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                            </div>
+                                            <input type="text" class="form-control pull-right" id="userName" maxlength="100">
+                                            <!-- / <button type="button" class="btn btn-info pull-right" onclick="onCheckUserBtnClick()">Check</button> -->
+                                        </div>
+                                    </div>
+                                    <!-- /.Username -->
+                                    <!-- Name -->
+                                    <div class="row">
+                                        <!-- First Name -->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label><span style="color:red;">*</span> First Name:</label>
+                                                <div class="input-group date">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-user"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control pull-right" id="firstName" maxlength="100">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.First Name -->
+                                        <!-- Last Name -->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Last Name:</label>
+                                                <div class="input-group date">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-user"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control pull-right" id="lastName" maxlength="100">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- ./Last Name -->
+                                    </div>
+                                    <!-- Name -->
+                                    <!-- Email -->
+                                    <div class="form-group">
+                                        <label><span style="color:red;">*</span> Email:</label>
+                                        <div class="input-group date">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-envelope"></i>
+                                            </div>
+                                            <input type="text" class="form-control pull-right" id="email" maxlength="225">
+                                        </div>
+                                    </div>
+                                    <!-- /.Email -->
+                                    <!-- Companies -->
+                                    <div class="form-group">
+                                        <label><span style="color:red;">*</span> Companies:</label>
+                                        <select class="form-control select2" multiple="multiple" data-placeholder=" Select company" style="width: 100%;" id="companies" onchange="onRoleChange()">
+                                            <option th:each="company: ${companies}" th:text="${company.companyId +' - '+ company.companyName}" th:value="${company.companyId}">PT. Mitra Adiperkasa</option>
+                                        </select>
+                                    </div>
+                                    <!-- /.Companies -->
+                                    <!-- Sbu -->
+                                    <div class="form-group">
+                                        <label><span style="color:red;">*</span> Sbu:</label>
+                                        <select class="form-control select2" multiple="multiple" data-placeholder=" Select sbu" style="width: 100%;" id="sbus">
+                                            <option value="">-Select  Sbu-</option>
+                                        </select>
+                                    </div>
+                                    <!-- Sbu -->
+                                    <!-- Role -->
+                                    <div class="form-group">
+                                        <label><span style="color:red;">*</span> Role:</label>
+                                        <select class="form-control" id="role">
+                                            <option value="">-Select  Role-</option>
+                                            <option th:each="role : ${roles}" th:value="${role.roleId}" th:text="${role.roleName}">ROLE_ADMIN</option>
+                                        </select>
+                                    </div>
+                                    <!-- Role -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <div class="col-md-10 col-md-offset-1">
+                                <div class="alert alert-danger alert-dismissible" style="display:none;" id="errMessageLayout">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+                                    <span id="errMessage">
+                                        Error Message Here.
+                                    </span>
+                                </div>
+                                <button type="button" class="btn btn-info pull-right" onclick="onSubmitUserBtnClick()">Submit</button>
+                            </div>
+
+                        </div>
+                        <!-- /.box-footer -->
+                    </form>
+                </div>
+            </section>
+            <!-- /.Main Content -->
+        </div>
+        <!--/.content-wrapper -->
+
+        <th:block th:insert="fragments/footer.html::footer">
+        </th:block>
+    </div>
+
+    <th:block th:include="fragments/footer.html::main-scripts">
+    </th:block>
+
+    <!-- Sweet Alert 2 Script -->
+    <script th:src="@{/sweet_alert2/sweetalert2.min.js}"></script>
+    <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
+    <script th:src="@{/sweet_alert2/sweetalert2_optional.js}"></script>
+
+    <!-- Select2 -->
+    <script th:src="@{/bower_components/select2/dist/js/select2.full.min.js}"></script>
+
+    <!-- Email validator -->
+    <script th:src="@{/scripts/utils/email-validator.js}"></script>
+
+    <!-- Menu Activator script -->
+    <script th:src="@{/scripts/utils/menu-activator.js}"></script>
+
+    <!-- Create new User script -->
+    <script th:src="@{/scripts/users/create-new-user.js}"></script>
+
+</body>
+</html>

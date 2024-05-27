@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!-- /.content-wrapper -->
+    <footer th:fragment="footer" class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> 19.08-M-001
+        </div>
+        <strong>PT. Mitra Adiperkasa, Tbk.</strong>
+    </footer>
+
+    <!-- Scripts -->
+    <div th:fragment="main-scripts">
+        <!-- jQuery 3 -->
+        <script th:src="@{/bower_components/jquery/dist/jquery.min.js}"></script>
+        <!-- jQuery UI 1.11.4 -->
+        <script th:src="@{/bower_components/jquery-ui/jquery-ui.min.js}"></script>
+        <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+        <script>
+            $.widget.bridge('uibutton', $.ui.button);
+        </script>
+        <!-- Bootstrap 3.3.7 -->
+        <script th:src="@{/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+        <!-- Sparkline -->
+        <script th:src="@{/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js}"></script>
+
+        <!-- Bootstrap WYSIHTML5 -->
+        <script th:src="@{/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js}"></script>
+        <!-- Slimscroll -->
+        <script th:src="@{/bower_components/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+        <!-- FastClick -->
+        <script th:src="@{/bower_components/fastclick/lib/fastclick.js}"></script>
+        <!-- AdminLTE App -->
+        <script th:src="@{/dist/js/adminlte.min.js}"></script>
+    </div>
+    <!-- /. Scripts-->
+</body>
+</html>

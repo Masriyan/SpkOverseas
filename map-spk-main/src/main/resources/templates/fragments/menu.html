@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags" lang="en">
+<head th:fragment="main-style">
+    <meta charset="utf-8"/>
+    <!-- favicon -->
+    <link rel="icon" th:href="@{~/images/favicon.ico}">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" th:href="@{/bower_components/bootstrap/dist/css/bootstrap.min.css}"/>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" th:href="@{/bower_components/font-awesome/css/font-awesome.min.css}"/>
+    <!-- Ionicons -->
+    <link rel="stylesheet" th:href="@{/bower_components/Ionicons/css/ionicons.min.css}"/>
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{/dist/css/AdminLTE.min.css}"/>
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" th:href="@{/dist/css/skins/_all-skins.min.css}"/>
+
+    <!-- Google Font -->
+    <link rel="stylesheet" th:href="@{/css/googleapis.css}">
+</head>
+<body>
+    <!-- Header Menu -->
+    <header th:fragment="header-menu" class="main-header">
+        <!-- Logo -->
+        <a class="logo" th:href="@{/}">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>MAP</b> - SPK</span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>MAP</b> - SPK</span>
+        </a>
+        <!-- End of Logo -->
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="hidden-xs" th:utext="${#request.userPrincipal.name}" id="loggedInUserName">Hendry Susanto</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- End of Header Navbar: style can be found in header.less -->
+    </header>
+    <!-- /.Header Menu -->
+
+    <!-- Left side column. contains the logo and sidebar -->
+    <div th:fragment="left-side-menu" class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">MAIN NAVIGATION</li>
+                <li id="menuSpk" class="treeview">
+                    <a href="#">
+                        <i class="fa fa-file-text"></i> <span>Work Order</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li id="menuListOfSpk"><a th:href="@{/surat-perintah-kerja}"><i class="fa fa-list text-aqua"></i> List of SPK</a></li>
+                        <!-- <li id="menuCreateNewSpk" sec:authorize="hasAnyRole({'ROLE_OPERATION','ROLE_ADMIN'})"><a href="#"><i class="fa fa-files-o text-aqua"></i> Create New SPK</a></li> -->
+                        <li id="menuCreateSpkO10k" sec:authorize="hasAnyRole({'ROLE_OPERATION','ROLE_ADMIN'})"><a th:href="@{/surat-perintah-kerja/create-new-spk}"><i class="fa fa-files-o text-aqua"></i>Create SPK Asset</a></li>
+                        <li id="menuCreateSpkU10k" sec:authorize="hasAnyRole({'ROLE_OPERATION','ROLE_ADMIN'})"><a th:href="@{/surat-perintah-kerja/create-new-spk2}"><i class="fa fa-files-o text-aqua"></i>Create SPK Expenses</a></li>
+                     </ul>
+                </li>
+                <li id="menuUsers" class="treeview" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a href="#">
+                        <i class="fa fa-users"></i> <span>Users</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li id="menuListOfUsers"><a th:href="@{/users}"><i class="fa fa-list text-aqua"></i> List of Users</a></li>
+                        <li id="menuAddNewUser"><a th:href="@{/users/create-new-user}"><i class="fa fa-user-plus text-aqua"></i> Add New User</a></li>
+                    </ul>
+                </li>
+                <li id="menuCompanies" class="treeview" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a href="#">
+                        <i class="fa fa-building"></i> <span>Companies & SBU</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li id="menuListOfCompanies"><a th:href="@{/companies}"><i class="fa fa-list text-aqua"></i> List Companies & SBU</a></li>
+                        <li id="menuAddNewCompany"><a th:href="@{/companies/create-new-company}"><i class="fa fa-plus text-aqua"></i> Add Company & SBU</a></li>
+                    </ul>
+                </li>
+                <li id="menuCountries" class="treeview" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a href="#">
+                        <i class="fa fa-flag"></i> <span>Country</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li id="menuListOfCountries"><a th:href="@{/countries}"><i class="fa fa-list text-aqua"></i> List Countries</a></li>
+                        <li id="menuAddNewCountry"><a th:href="@{/countries/create-new-country}"><i class="fa fa-plus text-aqua"></i> Add Country</a></li>
+                    </ul>
+                </li>
+                <!-- /. Approval Rules-->
+                <li id="menuRules" class="treeview" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a href="#">
+                        <i class="fa fa-odnoklassniki"></i> <span>Approval Rules</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li id="menuListOfRules"><a th:href="@{/rules}"><i class="fa fa-list text-aqua"></i> List of Approval Rules</a></li>
+                        <li id="menuAddNewRule"><a th:href="@{/rules/create-new-app-rule}"><i class="fa fa-plus text-aqua"></i> Add New Approval Rule </a></li>
+                    </ul>
+                </li>
+                <li id="menuChangePassword"><a th:href="@{/users/change-password}"><i class="fa fa-unlock-alt"></i> <span>Change Password</span></a></li>
+                <li><a th:href="@{/logout}"><i class="fa fa-power-off"></i> <span>Sign Out</span></a></li>
+            </ul>
+        </section>
+    </div>
+    <!-- ./Left side column.-->
+</body>
+</html>

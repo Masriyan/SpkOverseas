@@ -1,0 +1,36 @@
+.form-horizontal .control-label {
+    padding-top: 7px;
+    margin-bottom: 0;
+    text-align: left;
+}
+
+.swal2-popup {
+    font-size: 1.6rem !important;
+}
+
+#vendor:hover{
+    cursor: pointer;
+}
+
+#costCenter:hover{
+    cursor: pointer;
+}
+
+.table-striped th{
+    text-align: center;
+}
+
+.table-striped tbody tr:hover{
+    cursor: pointer;
+    background-color: #e5ebf7 !important;
+}
+
+.table-striped thead{
+    background-color: #f39c12;
+    color: #ffffff;
+}
+
+.modal-dialog {
+    width: 800px;
+    margin: 30px auto;
+}

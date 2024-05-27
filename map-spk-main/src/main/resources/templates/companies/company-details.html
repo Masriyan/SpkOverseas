@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>SPK | Sbu Company Details</title>
+    <th:block th:include="fragments/menu.html::main-style"></th:block>
+
+    <!-- Select2 -->
+    <link rel="stylesheet" th:href="@{/bower_components/select2/dist/css/select2.min.css}">
+
+    <!-- Sweet Alert 2 -->
+    <link rel="stylesheet" th:href="@{/sweet_alert2/sweetalert2.min.css}">
+    <link rel="stylesheet" th:href="@{/sweet_alert2/sweetalert2.css}">
+
+    <!-- Custom User Details Style -->
+    <link rel="stylesheet" th:href="@{/css/users/user-details.css}">
+</head>
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+<!--/*@thymesVar id="user" type="id.co.map.spk.entities.AppUserEntity"*/-->
+<!--/*@thymesVar id="companies" type="java.util.List"*/-->
+<!--/*@thymesVar id="company" type="id.co.map.spk.entities.CompanyEntity"*/-->
+<!--/*@thymesVar id="role" type="id.co.map.spk.entities.RoleEntity"*/-->
+    <div class="wrapper">
+        <th:block th:insert="fragments/menu.html::header-menu">
+        </th:block>
+        <th:block th:insert="fragments/menu.html::left-side-menu">
+        </th:block>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Main Content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="box box box-primary">
+                            <div class="box-header with-border">
+                                <h3>Company Detail</h3>
+                            </div>
+                            <div class="box-body">
+                                <!-- User Details-->
+                                <div class="user-detail">
+                                    <div class="description">
+                                        COMPANY ID
+                                    </div>
+                                    <div class="user-value">
+                                        <span th:text="${companies.CompanyId}" id="compid">awie.susanto</span>
+                                    </div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="description">
+                                        COMPANY NAME
+                                    </div>
+                                    <div class="user-value">
+                                        <span th:text="${companies.CompanyName}" id="namecomp">Hendry Susanto</span>
+                                    </div>
+                                    <div class="edit-action pull-right">
+                                        <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeCompName()"><i class="fa fa-edit"></i></button>
+                                    </div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="description">
+                                        NPWP
+                                    </div>
+                                    <div class="user-value">
+                                        <span th:text="${companies.Npwp}" id="npwpcomp">awie.susanto</span>
+                                    </div>
+                                    <div class="edit-action pull-right">
+                                        <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeNPWP()"><i class="fa fa-edit"></i></button>
+                                    </div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="description">
+                                        ADDRESS 1
+                                    </div>
+                                    <div class="user-value">
+                                        <span th:text="${companies.Address1}" id="add1comp">awie.susanto</span>
+                                    </div>
+                                    <div class="edit-action pull-right">
+                                        <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeAdd1()"><i class="fa fa-edit"></i></button>
+                                    </div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="description">
+                                        ADDRESS 2
+                                    </div>
+                                    <div class="user-value">
+                                        <span th:text="${companies.Address2}" id="add2comp">awie.susanto</span>
+                                    </div>
+                                    <div class="edit-action pull-right">
+                                        <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeAdd2()"><i class="fa fa-edit"></i></button>
+                                    </div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="description">
+                                        COA
+                                    </div>
+                                    <div class="user-value">
+                                        <span th:text="${companies.Coa}" id="coacomp">awie.susanto@map.co.id</span>
+                                    </div>
+                                    <div class="edit-action pull-right">
+                                        <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeCoa()"><i class="fa fa-edit"></i></button>
+                                    </div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="description">
+                                        SBU
+                                    </div>
+                                    <div class="user-value">
+                                        <span th:value="${sbus.sbuId}" id="sbucomp">[[${sbus.sbuCode}]] - [[${sbus.sbuDesc}]] </span>
+                                    </div>
+                                    <div class="edit-action pull-right">
+                                        <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeSbu()"><i class="fa fa-edit"></i></button>
+                                    </div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="description">
+                                        Country Name
+                                    </div>
+                                    <div class="user-value">
+                                        <span th:text="${companies.CountryName}" id="country">awie.susanto@map.co.id</span>
+                                    </div>
+                                    <div class="edit-action pull-right">
+                                        <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeCountry()"><i class="fa fa-edit"></i></button>
+                                    </div>
+                                </div>
+<!--                                <div class="user-detail">-->
+<!--                                    <div class="description">-->
+<!--                                        Country-->
+<!--                                    </div>-->
+<!--                                    <div class="user-value">-->
+<!--                                        <span th:text="${companies.country}" id="country">awie.susanto@map.co.id</span>-->
+<!--                                    </div>-->
+<!--                                    <div class="edit-action pull-right">-->
+<!--                                        <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeCountry()"><i class="fa fa-edit"></i></button>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                                <!--
+                                <div class="user-detail">
+                                    <div class="description">
+                                        Header Image
+                                    </div>
+                                    <div class="user-value">
+                                        <button id ="imageView" type="button" th:text="${companies.HeaderImage}" th:value="${companies.HeaderImage}" class="btn btn-warning btn-sm" onclick="onClickViewImage()"></button>
+                                    </div>
+                                    <div class="edit-action pull-right">
+                                        <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeHeaderImg()"><i class="fa fa-edit"></i></button>
+                                    </div>
+                                </div>
+                                -->
+                                <div class="user-detail">
+                                    <div class="description">
+                                        RULE
+                                    </div>
+                                    <div class="user-value">
+                                        <span th:text="${sbus.ApprovalRulesId}" id="rule">RULE0000</span>
+                                    </div>
+                                    <div class="edit-action pull-right">
+                                        <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeRule()"><i class="fa fa-edit"></i></button>
+                                    </div>
+                                </div>
+                                <!-- /.User Details-->
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /.Main Content -->
+        </div>
+        <!--/.content-wrapper -->
+
+        <th:block th:insert="fragments/footer.html::footer">
+        </th:block>
+    </div>
+
+    <th:block th:include="fragments/footer.html::main-scripts">
+    </th:block>
+
+    <!-- Select2 -->
+    <script th:src="@{/bower_components/select2/dist/js/select2.full.min.js}"></script>
+
+    <!-- Sweet Alert 2 Script -->
+    <script th:src="@{/sweet_alert2/sweetalert2.min.js}"></script>
+    <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
+    <script th:src="@{/sweet_alert2/sweetalert2_optional.js}"></script>
+
+    <!-- User Details script -->
+    <script th:src="@{/scripts/companies/company-details.js}"></script>
+</body>
+</html>

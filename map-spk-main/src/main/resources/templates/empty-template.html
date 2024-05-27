@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>MAP | SPK</title>
+
+    <th:block th:include="fragments/menu.html::main-style">
+    </th:block>
+</head>
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+    <div class="wrapper">
+        <th:block th:insert="fragments/menu.html::header-menu">
+        </th:block>
+        <th:block th:insert="fragments/menu.html::left-side-menu">
+        </th:block>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+
+            <!-- Content header -->
+            <section class="content-header">
+                <h1>Empty Template</h1>
+            </section>
+            <!-- /.Content header -->
+
+            <!-- Main Content -->
+            <section class="content">
+
+            </section>
+            <!-- /.Main Content -->
+        </div>
+        <!--/.content-wrapper -->
+
+        <th:block th:insert="fragments/footer.html::footer">
+        </th:block>
+    </div>
+
+    <th:block th:include="fragments/footer.html::main-scripts">
+    </th:block>
+</body>
+</html>

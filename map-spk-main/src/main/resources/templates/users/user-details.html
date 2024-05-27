@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>SPK | User Details</title>
+    <th:block th:include="fragments/menu.html::main-style"></th:block>
+
+    <!-- Select2 -->
+    <link rel="stylesheet" th:href="@{/bower_components/select2/dist/css/select2.min.css}">
+
+    <!-- Sweet Alert 2 -->
+    <link rel="stylesheet" th:href="@{/sweet_alert2/sweetalert2.min.css}">
+    <link rel="stylesheet" th:href="@{/sweet_alert2/sweetalert2.css}">
+
+    <!-- Custom User Details Style -->
+    <link rel="stylesheet" th:href="@{/css/users/user-details.css}">
+</head>
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+<!--/*@thymesVar id="user" type="id.co.map.spk.entities.AppUserEntity"*/-->
+<!--/*@thymesVar id="companies" type="java.util.List"*/-->
+<!--/*@thymesVar id="company" type="id.co.map.spk.entities.CompanyEntity"*/-->
+<!--/*@thymesVar id="role" type="id.co.map.spk.entities.RoleEntity"*/-->
+    <div class="wrapper">
+        <th:block th:insert="fragments/menu.html::header-menu">
+        </th:block>
+        <th:block th:insert="fragments/menu.html::left-side-menu">
+        </th:block>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Main Content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="box box box-primary">
+                            <div class="box-header with-border">
+                                <h3>Profile</h3>
+                            </div>
+                            <div class="box-body">
+                                <!-- User Details-->
+                                <div class="user-detail">
+                                    <div class="description">
+                                        USERNAME
+                                    </div>
+                                    <div class="user-value">
+                                        <span th:text="${user.userName}" id="userName">awie.susanto</span>
+                                    </div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="description">
+                                        NAME
+                                    </div>
+                                    <div class="user-value">
+                                        <span th:text="${user.firstName + ' ' + user.lastName}" id="fullName">Hendry Susanto</span>
+                                    </div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="description">
+                                        EMAIL
+                                    </div>
+                                    <div class="user-value">
+                                        <span th:text="${user.email}" id="email">awie.susanto@map.co.id</span>
+                                    </div>
+                                    <div class="edit-action pull-right">
+                                        <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangePassword()"><i class="fa fa-edit"></i></button>
+                                    </div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="description">
+                                        COMPANIES
+                                    </div>
+                                    <div class="user-value">
+                                       <ul>
+                                           <li th:each="company: ${companies}" th:id="${company.companyId}">[[${company.companyId}]] - [[${company.companyName}]] <i class="fa fa-close text-red user-company" th:onclick='onClickDeleteCompany([[${company.companyId}]], [[${company.companyName}]])'></i></li>
+                                       </ul>
+                                    </div>
+                                    <div class="edit-action pull-right">
+                                        <button type="button" class="btn btn-success btn-sm" onclick="onClickAddCompanies()"><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="description">
+                                        SBU
+                                    </div>
+                                    <div class="user-value">
+                                        <ul>
+                                            <li th:each="sbu: ${sbus}" th:id="sbu+${sbu.sbuId}">[[${sbu.sbuCode}]] - [[${sbu.sbuDesc}]] <i class="fa fa-close text-red user-company" th:onclick='onClickDeleteSbu([[${sbu.sbuId}]], [[${sbu.sbuDesc}]])'></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="edit-action pull-right">
+                                        <button type="button" class="btn btn-success btn-sm" onclick="onClickAddSbus()"><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="description">
+                                        ROLE
+                                    </div>
+                                    <div class="user-value">
+                                        <span th:text="${role.roleName}" id="role">ADMIN</span>
+                                    </div>
+                                    <div class="edit-action pull-right">
+                                        <button type="button" class="btn btn-warning btn-sm" onclick="onClickChangeRole()"><i class="fa fa-edit"></i></button>
+                                    </div>
+                                </div>
+                                <!-- /.User Details-->
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /.Main Content -->
+        </div>
+        <!--/.content-wrapper -->
+
+        <th:block th:insert="fragments/footer.html::footer">
+        </th:block>
+    </div>
+
+    <th:block th:include="fragments/footer.html::main-scripts">
+    </th:block>
+
+    <!-- Select2 -->
+    <script th:src="@{/bower_components/select2/dist/js/select2.full.min.js}"></script>
+
+    <!-- Sweet Alert 2 Script -->
+    <script th:src="@{/sweet_alert2/sweetalert2.min.js}"></script>
+    <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
+    <script th:src="@{/sweet_alert2/sweetalert2_optional.js}"></script>
+
+    <!-- User Details script -->
+    <script th:src="@{/scripts/users/user-details.js}"></script>
+</body>
+</html>

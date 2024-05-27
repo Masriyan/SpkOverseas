@@ -1,0 +1,48 @@
+/* Increase sweet alert size*/
+.swal2-popup {
+    font-size: 1.6rem !important;
+}
+
+.user-detail{
+    width: 100%;
+    float: left;
+    position: relative;
+    min-height: 1px;
+    padding: 15px 15px 15px 15px;
+    border-bottom: 1px solid #5f6368;
+}
+
+.description{
+    width: 33.33333333%;
+    float: left;
+    position: relative;
+    min-height: 1px;
+    color: #5f6368;
+    padding-top: 2px;
+}
+
+.user-value{
+    width: 56.66666667%;
+    float: left;
+    position: relative;
+    min-height: 1px;
+    color: #0a0a0a;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.edit-action{
+    width: 10%;
+    float: left;
+    position: relative;
+    min-height: 1px;
+    text-align: right;
+}
+
+.user-company:hover{
+    cursor: pointer;
+}
+
+.select2-container {
+    z-index: 99999999999999;
+}

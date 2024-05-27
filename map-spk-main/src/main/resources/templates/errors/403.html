@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>MAP | SPK</title>
+
+    <th:block th:include="fragments/menu.html::main-style">
+    </th:block>
+</head>
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+    <div class="wrapper">
+        <th:block th:insert="fragments/menu.html::header-menu">
+        </th:block>
+        <th:block th:insert="fragments/menu.html::left-side-menu">
+        </th:block>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Main Content -->
+            <section class="content">
+                <div class="error-page">
+                    <h2 class="headline text-yellow"> 403</h2>
+
+                    <div class="error-content">
+                        <h3><i class="fa fa-warning text-yellow"></i> Unauthorize!</h3>
+                        <p>
+                            You do not have permission to this page.
+                            Meanwhile, you may <a th:href="@{/}">return to home</a>.
+                        </p>
+                    </div>
+                    <!-- /.error-content -->
+                </div>
+            </section>
+            <!-- /.Main Content -->
+        </div>
+        <!--/.content-wrapper -->
+
+        <th:block th:insert="fragments/footer.html::footer">
+        </th:block>
+    </div>
+
+    <th:block th:include="fragments/footer.html::main-scripts">
+    </th:block>
+</body>
+</html>

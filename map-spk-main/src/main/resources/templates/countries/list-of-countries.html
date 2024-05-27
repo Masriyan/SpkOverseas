@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>SPK | List Of Countries</title>
+
+    <th:block th:include="fragments/menu.html::main-style">
+    </th:block>
+
+    <!-- Sweet Alert 2 -->
+    <link rel="stylesheet" th:href="@{/sweet_alert2/sweetalert2.min.css}">
+
+    <!-- DataTables -->
+    <link rel="stylesheet" th:href="@{/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css}">
+
+    <!-- Custom List Of Companies Style -->
+    <link rel="stylesheet" th:href="@{/css/countries/list-of-countries.css}">
+</head>
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+<div class="wrapper">
+    <th:block th:insert="fragments/menu.html::header-menu">
+    </th:block>
+    <th:block th:insert="fragments/menu.html::left-side-menu">
+    </th:block>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Main Content -->
+        <section class="content">
+            <!-- SPK Filter -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Filter</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="col-sm-3">
+                                <label for="filterCountryCode" class="col-sm-12 control-label">Country Code: </label>
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" id="filterCountryCode" maxlength="10">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label for="filterCountryName" class="col-sm-12 control-label">Country Name: </label>
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="filterCountryName" maxlength="30">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12" align="right" style="margin-top: 15px;">
+                                    <div class="col-sm-3 col-sm-offset-9">
+                                        <table class="table table-bordered text-center">
+                                            <tbody><tr>
+                                                <td>
+                                                    <button type="button" class="btn bg-maroon" onclick="onClearClick()">
+                                                        <i class="fa fa-eraser"></i>  <b>CLEAR</b>
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-block btn-warning" onclick="onFilterCountryClick()">
+                                                        <i class="fa fa-search"></i>  <b>FILTER</b>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.SPK Filter -->
+
+            <!-- SPK List -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">List of Countries</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-striped" id="country-list-table">
+                                        <thead>
+                                        <tr>
+                                            <th>Country Id</th>
+                                            <th>Country Code</th>
+                                            <th>Country Name</th>
+                                            <th>Command</th>
+                                        </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.SPK List -->
+        </section>
+        <!-- /.Main Content -->
+    </div>
+    <!--/.content-wrapper -->
+
+    <th:block th:insert="fragments/footer.html::footer">
+    </th:block>
+</div>
+
+<th:block th:include="fragments/footer.html::main-scripts"></th:block>
+
+<!-- Sweet Alert 2 Script -->
+<script th:src="@{/sweet_alert2/sweetalert2.min.js}"></script>
+<!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
+<script th:src="@{/sweet_alert2/sweetalert2_optional.js}"></script>
+
+<!-- DataTables -->
+<script th:src="@{/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
+
+<!-- Menu Activator script -->
+<script th:src="@{/scripts/utils/menu-activator.js}"></script>
+
+<!-- List of SPK script -->
+<script th:src="@{/scripts/countries/list-of-countries.js}"></script>
+
+</body>
+</html>

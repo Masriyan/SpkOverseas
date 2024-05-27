@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+    <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
+    <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
+
+    <!-- Properties -->
+    <property name="COLOR-PATTERN" value="%clr(%d{HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%wEx"/>
+    <property name="NO-COLOR-PATTERN" value="%d{HH:mm:ss.SSS} %5p ${PID:- } --- [%15.15t] %-40.40logger{39} : %m%n%wEx"/>
+    <property name="LOG-DIR" value="C:/Data Support/Surat Perintah Kerja/Logs"/>
+    <!-- <property name="LOG-DIR" value="D:/Surat Perintah Kerja/Logs"/> -->
+    <property name="LOG-DIR-ARCHIVE" value="${LOG-DIR}/Archived"/>
+    <property name="FILE-NAME" value="log-spk.log"/>
+    <property name="FILE-NAME-ARCHIVE" value="log-spk-%d{yyyy-MM-dd}.%i.log"/>
+
+    <!-- Console -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                ${COLOR-PATTERN}
+            </Pattern>
+        </layout>
+    </appender>
+
+    <springProfile name="prod">
+        <!-- File Appender-->
+        <appender name="FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${LOG-DIR}/${FILE-NAME}</file>
+
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>
+                    ${LOG-DIR-ARCHIVE}/${FILE-NAME-ARCHIVE}
+                </fileNamePattern>
+                <!-- each archived file, size max 10MB -->
+                <maxFileSize>10MB</maxFileSize>
+                <!-- total size of all archive files, if total size > 10GB,it will delete old archived file -->
+                <totalSizeCap>10GB</totalSizeCap>
+                <!-- 90 days to keep -->
+                <maxHistory>90</maxHistory>
+            </rollingPolicy>
+
+            <encoder>
+                <pattern>${NO-COLOR-PATTERN}</pattern>
+            </encoder>
+        </appender>
+
+        <appender name="FILE-ROLLING-ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+            <appender-ref ref="FILE-ROLLING" />
+        </appender>
+
+        <logger name="id.co.map.spk" level="DEBUG" additivity="false">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="FILE-ROLLING-ASYNC"/>
+        </logger>
+
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="FILE-ROLLING-ASYNC"/>
+        </root>
+    </springProfile>
+
+
+    <springProfile name="awie">
+        <logger name="id.co.ma.spk" level="DEBUG" additivity="false">
+            <appender-ref ref="CONSOLE"/>
+        </logger>
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="dev">
+        <logger name="id.co.ma.spk" level="DEBUG" additivity="false">
+            <appender-ref ref="CONSOLE"/>
+        </logger>
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="fnbLocal">
+        <logger name="id.co.ma.spk" level="DEBUG" additivity="false">
+            <appender-ref ref="CONSOLE"/>
+        </logger>
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+</configuration>

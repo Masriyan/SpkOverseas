@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>MAP | List Of Users</title>
+
+    <th:block th:include="fragments/menu.html::main-style">
+    </th:block>
+
+    <!-- Sweet Alert 2 -->
+    <link rel="stylesheet" th:href="@{/sweet_alert2/sweetalert2.min.css}">
+
+    <!-- DataTables -->
+    <link rel="stylesheet" th:href="@{/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css}">
+
+    <!-- Custom List Of SPK Style -->
+    <link rel="stylesheet" th:href="@{/css/users/list-of-users.css}">
+</head>
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+<div class="wrapper">
+    <th:block th:insert="fragments/menu.html::header-menu">
+    </th:block>
+    <th:block th:insert="fragments/menu.html::left-side-menu">
+    </th:block>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Main Content -->
+        <section class="content">
+            <!-- SPK Filter -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Filter</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label for="filterUserName" class="col-sm-12 control-label">User Name: </label>
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="filterUserName" maxlength="100">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="filterName" class="col-sm-12 control-label">Name: </label>
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="filterName" maxlength="100">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="filterRoleId" class="col-sm-12 control-label">Role: </label>
+                                    <div class="col-sm-12">
+                                        <select class="form-control" id="filterRoleId">
+                                            <option value="0">-Select  Role-</option>
+                                            <option th:each="role : ${roles}" th:value="${role.roleId}" th:text="${role.RoleName}">Admin</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12" align="right" style="margin-top: 15px;">
+                                    <div class="col-sm-3 col-sm-offset-9">
+                                        <table class="table table-bordered text-center">
+                                            <tbody><tr>
+                                                <td>
+                                                    <button type="button" class="btn bg-maroon" onclick="onClearClick()">
+                                                        <i class="fa fa-eraser"></i>  <b>CLEAR</b>
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-block btn-warning" onclick="onFilterUserClick()">
+                                                        <i class="fa fa-search"></i>  <b>FILTER</b>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.SPK Filter -->
+
+            <!-- SPK List -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">List of Users</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-striped" id="user-list-table">
+                                        <thead>
+                                        <tr>
+                                            <th>User name</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Email</th>
+                                            <th>Role</th>
+                                            <th>Status</th>
+                                            <th>Command</th>
+                                        </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.SPK List -->
+        </section>
+        <!-- /.Main Content -->
+    </div>
+    <!--/.content-wrapper -->
+
+    <th:block th:insert="fragments/footer.html::footer">
+    </th:block>
+</div>
+
+    <th:block th:include="fragments/footer.html::main-scripts"></th:block>
+
+    <!-- Sweet Alert 2 Script -->
+    <script th:src="@{/sweet_alert2/sweetalert2.min.js}"></script>
+    <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
+    <script th:src="@{/sweet_alert2/sweetalert2_optional.js}"></script>
+
+    <!-- DataTables -->
+    <script th:src="@{/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
+
+    <!-- Menu Activator script -->
+    <script th:src="@{/scripts/utils/menu-activator.js}"></script>
+
+    <!-- List of SPK script -->
+    <script th:src="@{/scripts/users/list-of-users.js}"></script>
+
+</body>
+</html>

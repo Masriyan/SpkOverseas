@@ -1,0 +1,11 @@
+.swal2-popup {
+    font-size: 1.6rem !important;
+}
+
+.fa-eye:hover{
+    cursor: pointer;
+}
+
+.fa-eye-slash:hover{
+    cursor: pointer;
+}

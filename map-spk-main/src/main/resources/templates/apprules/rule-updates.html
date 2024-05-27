@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>SPK | Update Approval Rule</title>
+
+    <!-- Sweet Alert 2 -->
+    <link rel="stylesheet" th:href="@{/sweet_alert2/sweetalert2.min.css}">
+
+    <!-- Select2 -->
+    <link rel="stylesheet" th:href="@{/bower_components/select2/dist/css/select2.min.css}">
+
+    <th:block th:include="fragments/menu.html::main-style">
+    </th:block>
+
+    <!-- Custom Create New User Style -->
+    <link rel="stylesheet" th:href="@{/css/users/create-new-user.css}">
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+<!--/*@thymesVar id="companies" type="id.co.map.spk.entities.CompanyEntity"*/-->
+<!--/*@thymesVar id="roles" type="id.co.map.spk.entities.RoleEntity"*/-->
+<div class="wrapper">
+    <th:block th:insert="fragments/menu.html::header-menu">
+    </th:block>
+    <th:block th:insert="fragments/menu.html::left-side-menu">
+    </th:block>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Main Content -->
+        <section class="content">
+            <div class="box box-default">
+                <form>
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Update Approval Rule</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-3">
+                                <div class="form-group" id="divnewId">
+                                    <label> Rule Id :</label>
+                                    <div class="input-group date">
+                                        <input type="text" id="eksId" th:value="${rule.approvalRulesId}" readonly />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label><span style="color:red;">*</span> Level:</label>
+                                        <input type="text" id="lev" th:value="${rule.approvalLevel}" readonly />
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label><span style="color:red;">*</span> Role :</label>
+                                            <select class="form-control" id="roleidUpd">
+                                                <option value="0">-Select Role-</option>
+                                                <option th:each="role : ${roles}" th:value="${role.roleId}" th:text="${role.roleName}">ADMIN</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!-- Min Amount -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label><span style="color:red;">*</span> Min Amount:</label>
+                                            <div class="input-group date">
+                                                <select class="form-control" id="minamountUpd">
+                                                    <option value="">-Select Min Amount-</option>
+                                                    <option value="1.00" text="1.00">1.00</option>
+                                                    <option value="200000000.00" text="200000000.00">200000000.00</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.Min Amount -->
+                                    <!-- Max Amount -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Max Amount:</label>
+                                            <div class="input-group date">
+                                                <select class="form-control" id="maxamountUpd">
+                                                    <option value="">-Select Max Amount-</option>
+                                                    <option value="199999999.00" text="199999999.00">199999999.00</option>
+                                                    <option value="999999999999.00" text="999999999999.00">999999999999.00</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- ./Max Amount -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="alert alert-danger alert-dismissible" style="display:none;" id="errMessageLayout">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+                                <span id="errMessage">
+                                        Error Message Here.
+                                    </span>
+                            </div>
+                            <button type="button" class="btn btn-info pull-right" onclick="onUpdateRuleBtnClick()">Update</button>
+                        </div>
+
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
+            </div>
+        </section>
+        <!-- /.Main Content -->
+    </div>
+    <!--/.content-wrapper -->
+
+    <th:block th:insert="fragments/footer.html::footer">
+    </th:block>
+</div>
+
+<th:block th:include="fragments/footer.html::main-scripts">
+</th:block>
+
+<!-- Sweet Alert 2 Script -->
+<script th:src="@{/sweet_alert2/sweetalert2.min.js}"></script>
+<!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
+<script th:src="@{/sweet_alert2/sweetalert2_optional.js}"></script>
+
+<!-- Select2 -->
+<script th:src="@{/bower_components/select2/dist/js/select2.full.min.js}"></script>
+
+<!-- Email validator -->
+<script th:src="@{/scripts/utils/email-validator.js}"></script>
+
+<!-- Menu Activator script -->
+<script th:src="@{/scripts/utils/menu-activator.js}"></script>
+
+<!-- Create new User script -->
+<script th:src="@{/scripts/apprule/update-rule.js}"></script>
+</body>
+</html>

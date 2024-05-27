@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>MAP | Create SPK Expense</title>
+
+    <th:block th:include="fragments/menu.html::main-style"></th:block>
+
+    <!-- bootstrap datepicker -->
+    <link rel="stylesheet" th:href="@{/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css}">
+
+    <!-- Sweet Alert 2 -->
+    <link rel="stylesheet" th:href="@{/sweet_alert2/sweetalert2.min.css}">
+
+    <!-- DataTables -->
+    <link rel="stylesheet" th:href="@{/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css}">
+
+    <!-- Custom Create New SPK Style -->
+    <link rel="stylesheet" th:href="@{/css/spk/create-new-spk.css}">
+</head>
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+<!--/*@thymesVar id="company" type="id.co.map.spk.entities.CompanyEntity"*/-->
+<!--/*@thymesVar id="companies" type="id.co.map.spk.entities.CompanyEntity"*/-->
+<!--/*@thymesVar id="asset" type="id.co.map.spk.entities.AssetClassEntity"*/-->
+<!--/*@thymesVar id="assets" type="id.co.map.spk.entities.AssetClassEntity"*/-->
+    <div class="wrapper">
+        <th:block th:insert="fragments/menu.html::header-menu"></th:block>
+        <th:block th:insert="fragments/menu.html::left-side-menu"></th:block>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Main Content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box box-info">
+                            <div class="box box-header with-border">
+                                <h3 class="box-title">
+                                    Work Order Expenses Form
+                                </h3>
+                            </div>
+                            <form class="form-horizontal" name="spkForm" id="spkForm">
+                                <div class="box-body">
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <div class="form-group">
+                                            <div class="col-sm-12">
+                                                <label for="spkDescription" class="col-sm-12 control-label"><span style="color:red;">*</span> SPK Description: </label>
+                                                <div class="col-sm-12">
+                                                    <input type="text" class="form-control" id="spkDescription" maxlength="150"/>
+                                                    <span class="help-block">Ex: Electrical Work(Price Quote No:XXI/1012/12314/PAP) at Zara Papua</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-6">
+                                                <label for="approvedQuotationDate" class="col-sm-12 control-label"><span style="color:red;">*</span> Approved Quotation Date: </label>
+                                                <div class="col-sm-12">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                        <input type="text" class="form-control pull-right" id="approvedQuotationDate">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="estimateStoreOpeningDate" class="col-sm-12 control-label"><span style="color:red;">*</span> Estimate Store Opening Date: </label>
+                                                <div class="col-sm-12">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                        <input type="text" class="form-control pull-right" id="estimateStoreOpeningDate">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-6">
+                                                <label for="company" class="col-sm-12 control-label"><span style="color:red;">*</span> Company: </label>
+                                                <div class="col-sm-12">
+                                                    <select class="form-control" id="company" onchange="onCompanyChange()">
+                                                        <option value="">-Select  Company-</option>
+                                                        <option th:each="company : ${companies}" th:value="${company.companyId}" th:text="${company.companyId} +' - '+ ${company.companyName}">0100 - Mitra Adiperkasa</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="sbu" class="col-sm-12 control-label"><span style="color:red;">*</span> SBU: </label>
+                                                <div class="col-sm-12">
+                                                    <select class="form-control" id="sbu" name="SbuId">
+                                                        <option value="">-Select  Sbu-</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-6">
+                                                <label for="vendor" class="col-sm-12 control-label"><span style="color:red;">*</span> Vendor: </label>
+                                                <div class="col-sm-12">
+                                                    <input type="text" class="form-control" style="background-color: #fff;" id="vendor" data-toggle="modal" data-target="#modal-vendor" readonly="readonly"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="store" class="col-sm-12 control-label"><span style="color:red;">*</span> Store Code: </label>
+                                                <div class="col-sm-12">
+                                                    <select class="form-control" id="store" name="storeId">
+                                                        <option value="">-Select  Store-</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-6">
+                                                <label for="costCenter" class="col-sm-12 control-label"><span style="color:red;">*</span> Cost Center: </label>
+                                                <div class="col-sm-12">
+                                                    <input type="text" class="form-control" style="background-color: #fff;" id="costCenter" data-toggle="modal" data-target="#modal-cost-center"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="assetClass" class="col-sm-12 control-label"><span style="color:red;">*</span> Expense Type: </label>
+                                                <div class="col-sm-12">
+                                                    <select class="form-control" id="assetClass" name="assetClassId">
+                                                        <option value="">-Select Expense Type-</option>
+                                                        <!-- <option th:each="asset : ${assets}" th:value="${asset.assetClassId}" th:text="${asset.assetClassId} +' - '+ ${asset.assetClassName}">0100 - Mitra Adiperkasa</option>-->
+                                                        <option value="9120" text="CONTRACTOR">CONTRACTOR</option>
+                                                        <option value="9600" text="IT PROJECT">IT PROJECT</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-6">
+                                                <label for="amount" class="col-sm-12 control-label"><span style="color:red;">*</span> Amount: <small>(Exclude VAT/GST)</small></label>
+                                                <div class="col-sm-12">
+                                                    <input type="text" class="form-control" id="amount" name="amount" maxlength="17"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="contactPerson" class="col-sm-12 control-label"><span style="color:red;">*</span> Contact Person: </label>
+                                                <div class="col-sm-12">
+                                                    <input type="text" class="form-control" id="contactPerson" name="contactPerson" maxlength="225"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-12 well well-sm no-shadow">
+                                                <label for="quotationFile" class="col-sm-12 control-label"><span style="color:red;">*</span>Quotation File: </label>
+                                                <div class="col-sm-12">
+                                                    <input type="file" id="quotationFile" name="quotationFile" accept="application/pdf"/>
+                                                    <p class="help-block">*) Quotation file in PDF format.</p>
+                                                    <p class="help-block">*) Maximum file size is 10 MB.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="callout callout-info">
+                                            <strong><p>Payment Term</p></strong>
+                                        </div>
+                                        <!-- Payment Term -->
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label col-sm-offset-2" style="text-align: center;">Amount</label>
+                                            <label class="col-sm-1 control-label" style="text-align: center;">Percentage(%)</label>
+                                            <label class="col-sm-7 control-label" style="text-align: center;">Message</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">1<sup>st</sup> Payment: </label>
+                                            <div class="col-sm-2">
+                                                <input type="text" class="form-control" id="top1Amount" style="text-align: end;" oninput="onInputPayment()" maxlength="17"/>
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <input type="number" class="form-control" id="top1Percentage" style="text-align: end;" oninput="onInputPayment()"/>
+                                            </div>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" id="top1Message" maxlength="150" disabled/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">2<sup>nd</sup> Payment: </label>
+                                            <div class="col-sm-2">
+                                                <input type="text" class="form-control" id="top2Amount" style="text-align: end;" oninput="onInputPayment()" maxlength="17"/>
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <input type="number" class="form-control" id="top2Percentage" style="text-align: end;" oninput="onInputPayment()"/>
+                                            </div>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" id="top2Message" maxlength="150" disabled/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">3<sup>rd</sup> Payment: </label>
+                                            <div class="col-sm-2">
+                                                <input type="text" class="form-control" id="top3Amount" style="text-align: end;" oninput="onInputPayment()" maxlength="17"/>
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <input type="number" class="form-control" id="top3Percentage" style="text-align: end;" oninput="onInputPayment()"/>
+                                            </div>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" id="top3Message" maxlength="150" disabled/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">4<sup>th</sup> Payment: </label>
+                                            <div class="col-sm-2">
+                                                <input type="text" class="form-control" id="top4Amount" style="text-align: end;" oninput="onInputPayment()" maxlength="17"/>
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <input type="number" class="form-control" id="top4Percentage" style="text-align: end;" oninput="onInputPayment()"/>
+                                            </div>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" id="top4Message" maxlength="150" disabled/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">5<sup>th</sup> Payment: </label>
+                                            <div class="col-sm-2">
+                                                <input type="text" class="form-control" id="top5Amount" style="text-align: end;" oninput="onInputPayment()" maxlength="17"/>
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <input type="number" class="form-control" id="top5Percentage" style="text-align: end;" oninput="onInputPayment()"/>
+                                            </div>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" id="top5Message" maxlength="150" disabled/>
+                                            </div>
+                                        </div>
+                                        <!-- /.Payment Term -->
+                                    </div>
+                                </div>
+                                <div class="box-footer">
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <div class="alert alert-danger alert-dismissible" style="display:none;" id="errMessageLayout">
+                                            <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+                                            <span id="errMessage">
+                                                Error Message Here.
+                                            </span>
+                                        </div>
+                                        <button class="btn btn-info pull-right" onclick="onSubmitBtnClick()" type="button">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /.Main Content -->
+
+            <!-- Modal -->
+            <!-- Modal Vendor -->
+            <div class="modal fade" id="modal-vendor">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Find Vendor</h4>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-striped" id="table-vendor">
+                                <thead>
+                                    <tr>
+                                        <th>Vendor Id</th>
+                                        <th>Vendor Name</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.Modal Vendor -->
+            <!-- Modal CostCenter -->
+            <div class="modal fade" id="modal-cost-center">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Find Cost Center</h4>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-striped" id="table-cost-center">
+                                <thead>
+                                <tr>
+                                    <th>Cost Center Code</th>
+                                    <th>Cose Center</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.Modal Vendor -->
+            <!-- /.Modal -->
+        </div>
+        <!--/.content-wrapper -->
+
+
+
+        <th:block th:insert="fragments/footer.html::footer">
+        </th:block>
+    </div>
+
+    <th:block th:include="fragments/footer.html::main-scripts"></th:block>
+
+    <!-- bootstrap datepicker -->
+    <script th:src="@{/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js}"></script>
+
+    <!-- Sweet Alert 2 Script -->
+    <script th:src="@{/sweet_alert2/sweetalert2.min.js}"></script>
+    <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
+    <script th:src="@{/sweet_alert2/sweetalert2_optional.js}"></script>
+
+    <!-- Auto numeric -->
+    <script th:src="@{/scripts/auto_numeric/autonumeric4.js}"></script>
+
+    <!-- Auto numeric -->
+    <script th:src="@{/scripts/auto_numeric/rupiah-format-input.js}"></script>
+
+    <!-- Date formatter -->
+    <script th:src="@{/scripts/utils/date-formatter.js}"></script>
+
+    <!-- DataTables -->
+    <script th:src="@{/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
+
+    <!-- Menu Activator script -->
+    <script th:src="@{/scripts/utils/menu-activator.js}"></script>
+
+    <!-- Create New SPK script -->
+    <script th:src="@{/scripts/spk/create-new-spk2.js}"></script>
+</body>
+</html>

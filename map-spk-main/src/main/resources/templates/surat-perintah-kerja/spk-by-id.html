@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags" lang="en">
+<head>
+    <title>MAP | SPK Details</title>
+
+    <th:block th:include="fragments/menu.html::main-style">
+    </th:block>
+
+    <!-- Sweet Alert 2 -->
+    <link rel="stylesheet" th:href="@{/sweet_alert2/sweetalert2.min.css}">
+    <link rel="stylesheet" th:href="@{/sweet_alert2/sweetalert2.css}">
+
+    <!-- Custom SPK by Id Style -->
+    <link rel="stylesheet" th:href="@{/css/spk/spk-by-id.css}">
+</head>
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+    <div class="wrapper">
+        <th:block th:insert="fragments/menu.html::header-menu">
+        </th:block>
+        <th:block th:insert="fragments/menu.html::left-side-menu">
+        </th:block>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+
+            <!-- Content header -->
+            <section class="content-header">
+                <h1>Details of Work Order</h1>
+            </section>
+            <!-- /.Content header -->
+
+            <!-- Main Content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box box-info">
+                            <form class="form-horizontal" name="spkForm">
+                                <div class="box-header with-border">
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <h3>
+                                            <span th:text="${spk.spkDescription}" id="spkDescription" >Electrical Work(Price Quote No:XXI/1012/12314/PAP) at Zara Papua</span>
+                                        </h3>
+                                        <h4>
+                                            <span th:text="${spk.spkId}" id="spkId" >P0002-BQ-0000003696-08-2019</span>
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <!-- SPK Details-->
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <div class="form-group">
+                                            <div class="col-sm-6">
+                                                <label class="col-sm-12 control-label">Approved Quotation Date </label>
+                                                <div class="col-sm-12 value-spk">
+                                                    <span th:text="${@textFormatter.toDateFormat(spk.approvedQuotationDate)}">15 August 2019</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="col-sm-12 control-label">Estimate Store Opening Date </label>
+                                                <div class="col-sm-12 value-spk">
+                                                    <span th:text="${@textFormatter.toDateFormat(spk.estimateStoreOpeningDate)}">20 September 2019</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-6">
+                                                <label class="col-sm-12 control-label">Company </label>
+                                                <div class="col-sm-12 value-spk">
+                                                    <span th:text="${company.companyId + ' - ' + company.companyName}" class="spk-value">0240 - PT. Bersama Karunia Mandiri</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="col-sm-12 control-label">Sbu </label>
+                                                <div class="col-sm-12 value-spk">
+                                                    <span th:text="${sbu.sbuCode + ' - ' + sbu.sbuDesc}" class="spk-value">TL - TRAVELOGUE</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-6">
+                                                <label class="col-sm-12 control-label">Vendor </label>
+                                                <div class="col-sm-12 value-spk">
+                                                    <span th:text="${vendor.vendorId + ' - ' + vendor.vendorName}">0000200035 - MITRA INTEGRASI INFORMATIKA PT</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="col-sm-12 control-label">Store </label>
+                                                <div class="col-sm-12 value-spk">
+                                                    <span th:text="${store.storeId + ' - ' + store.storeName}" class="spk-value">KA02 - BERSHKA CENTRAL PARK</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-6">
+                                                <label class="col-sm-12 control-label">Cost Center </label>
+                                                <div class="col-sm-12 value-spk">
+                                                    <span th:text="${costCenter.costCenterId + ' - ' + costCenter.costCenterName}">KAKAKA02 - BERSHKA CENTRAL PARK</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6" th:if="${spk.getSpkType() == 'Asset'}">
+                                                <label class="col-sm-12 control-label">Asset Number </label>
+                                                <div class="col-sm-12 value-spk">
+                                                    <span th:text="${spk.assetNo}" class="spk-value">COMP0001</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6" th:if="${spk.getSpkType() == 'Expense'}">
+                                                <label class="col-sm-12 control-label">Contact Person </label>
+                                                <div class="col-sm-12 value-spk">
+                                                    <span th:text="${spk.contactPerson}">Awie (0812-6166-8811)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-6" th:if="${spk.getSpkType() == 'Asset'}">
+                                                <label class="col-sm-12 control-label">Asset Class </label>
+                                                <div class="col-sm-12 value-spk">
+                                                    <span th:text="${assetClass.assetClassId + ' - ' + assetClass.assetClassName}" id="assetClass">9120 - Leasehold Improvement</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6" th:if="${spk.getSpkType() == 'Expense'}">
+                                                <label class="col-sm-12 control-label">Asset Type </label>
+                                                <div class="col-sm-12 value-spk">
+                                                    <span th:if="${assetClass.assetClassId == '9120'}" id="assetType1">CONTRACTOR</span>
+                                                    <span th:if="${assetClass.assetClassId == '9600'}" id="assetType2">IT PROJECT</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="col-sm-12 control-label">Amount (Exclude VAT/GST) </label>
+                                                <div class="col-sm-12 value-spk">
+                                                    <span th:text="${@textFormatter.toRupiahFormat(spk.amount)}" class="spk-value">Rp. 10.000.000,00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" th:if="${spk.getSpkType() == 'Asset'}">
+                                            <div class="col-sm-6">
+                                                <label class="col-sm-12 control-label">Contact Person </label>
+                                                <div class="col-sm-12 value-spk">
+                                                    <span th:text="${spk.contactPerson}">Awie (0812-6166-8811)</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="col-sm-12 control-label">Internal Order </label>
+                                                <div class="col-sm-12 value-spk">
+                                                    <span th:text="${spk.internalOrder}" class="spk-value">IO0000001</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-6">
+                                                <label class="col-sm-12 control-label">Purchase Order </label>
+                                                <div class="col-sm-12 value-spk">
+                                                    <span th:text="${spk.purchaseOrder}">PO00000001</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="col-sm-12 control-label">Supporting Document </label>
+                                                <div class="col-sm-12">
+
+                                                    <a class="btn bg-orange margin" th:href="@{__${#httpServletRequest.requestURL}__/quotation}" target="_blank">
+                                                        <i class="fa fa-file-text"></i>    VIEW QUOTATION
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.SPK Details-->
+                                    <!-- SPK Payment Term -->
+                                    <div class="col-md-12">
+                                        <div class="callout callout-info">
+                                            <h4>
+                                                Payment Term
+                                            </h4>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-1 payment-header">
+                                                Term of Payment
+                                            </div>
+                                            <div class="col-sm-3 payment-header">
+                                                Amount
+                                            </div>
+                                            <div class="col-sm-2 payment-header">
+                                                GR Amount
+                                            </div>
+                                            <div class="col-sm-4 payment-header">
+                                                Message
+                                            </div>
+                                        </div>
+                                        <div class="form-group" th:if="${spk.top1Amount > 0 or spk.top1Percentage >0}">
+                                            <div class="col-sm-1">
+                                                <label class="col-sm-12 control-label">1<sup>st</sup></label>
+                                            </div>
+                                            <div class="col-sm-3 value-spk">
+                                                <!-- shows percentage and amount -->
+                                                <span class="spk-value" th:if="${spk.top1Percentage > 0}">[[${spk.top1Percentage}]] % ([[${@textFormatter.toRupiahFormat(spk.top1Amount)}]])</span>
+                                                <!-- ononConfirmBtnClickly shows amount -->
+                                                <span class="spk-value" th:unless="${spk.top1Percentage > 0}">[[${@textFormatter.toRupiahFormat(spk.top1Amount)}]]</span>
+                                            </div>
+                                            <div class="col-sm-2 value-spk">
+                                                <span class="spk-value">[[${@textFormatter.toRupiahFormat(spk.grAmount1)}]]</span>
+                                            </div>
+                                            <div class="col-sm-4 message-spk" style="padding-left: 10px">
+                                                <span th:text="${spk.top1Message}"></span>
+                                            </div>
+                                            <div sec:authorize="hasRole('ROLE_OPERATION')" th:if="${spk.getStatus().name() == 'PURCHASE_ORDER_CREATED' and spk.getEntrySheet1().equals('')}" class="col-sm-1">
+                                                <button class="btn bg-olive margin" type="button" th:onclick="|onConfirmBtnClick(1, ${spk.top1Amount})|">Confirm</button>
+                                            </div>
+                                            <div th:if="${spk.getEntrySheet1() != ''}" class="col-sm-1 message-spk">
+                                                <span class="spk-value" th:text="${spk.entrySheet1}">1000000341</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" th:if="${spk.top2Amount > 0 or spk.top2Percentage >0}">
+                                            <div class="col-sm-1">
+                                                <label class="col-sm-12 control-label">2<sup>nd</sup></label>
+                                            </div>
+                                            <div class="col-sm-3 value-spk">
+                                                <!-- shows percentage and amount -->
+                                                <span class="spk-value" th:if="${spk.top2Percentage > 0}">[[${spk.top2Percentage}]] % ([[${@textFormatter.toRupiahFormat(spk.top2Amount)}]])</span>
+                                                <!-- only shows amount -->
+                                                <span class="spk-value" th:unless="${spk.top2Percentage > 0}">[[${@textFormatter.toRupiahFormat(spk.top2Amount)}]]</span>
+                                            </div>
+                                            <div class="col-sm-2 value-spk">
+                                                <span class="spk-value">[[${@textFormatter.toRupiahFormat(spk.grAmount2)}]]</span>
+                                            </div>
+                                            <div class="col-sm-4 message-spk" style="padding-left: 10px">
+                                                <span th:text="${spk.top2Message}"></span>
+                                            </div>
+                                            <div sec:authorize="hasRole('ROLE_OPERATION')" th:if="${spk.getStatus().name() == 'GR1' and spk.getEntrySheet2().equals('')  and spk.getEntrySheet1() != ''}" class="col-sm-1">
+                                                <button class="btn bg-olive margin" type="button" th:onclick="|onConfirmBtnClick(2, ${spk.top2Amount})|">Confirm</button>
+                                            </div>
+                                            <div th:if="${spk.getEntrySheet2() != ''}" class="col-sm-1 message-spk">
+                                                <span class="spk-value" th:text="${spk.entrySheet2}">1000000341</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" th:if="${spk.top3Amount > 0 or spk.top3Percentage >0}">
+                                            <div class="col-sm-1">
+                                                <label class="col-sm-12 control-label">3<sup>rd</sup></label>
+                                            </div>
+                                            <div class="col-sm-3 value-spk">
+                                                <!-- shows percentage and amount -->
+                                                <span class="spk-value" th:if="${spk.top3Percentage > 0}">[[${spk.top3Percentage}]] % ([[${@textFormatter.toRupiahFormat(spk.top3Amount)}]])</span>
+                                                <!-- only shows amount -->
+                                                <span class="spk-value" th:unless="${spk.top3Percentage > 0}">[[${@textFormatter.toRupiahFormat(spk.top3Amount)}]]</span>
+                                            </div>
+                                            <div class="col-sm-2 value-spk">
+                                                <span class="spk-value">[[${@textFormatter.toRupiahFormat(spk.grAmount3)}]]</span>
+                                            </div>
+                                            <div class="col-sm-4 message-spk" style="padding-left: 10px">
+                                                <span th:text="${spk.top3Message}"></span>
+                                            </div>
+                                            <div sec:authorize="hasRole('ROLE_OPERATION')" th:if="${spk.getStatus().name() == 'GR2' and spk.getEntrySheet3().equals('') and spk.getEntrySheet2() != ''}" class="col-sm-1">
+                                                <button class="btn bg-olive margin" type="button" th:onclick="|onConfirmBtnClick(3, ${spk.top3Amount})|">Confirm</button>
+                                            </div>
+                                            <div th:if="${spk.getEntrySheet3() != ''}" class="col-sm-1 message-spk">
+                                                <span class="spk-value" th:text="${spk.entrySheet3}">1000000341</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" th:if="${spk.top4Amount > 0 or spk.top4Percentage >0}">
+                                            <div class="col-sm-1">
+                                                <label class="col-sm-12 control-label">4<sup>th</sup></label>
+                                            </div>
+                                            <div class="col-sm-3 value-spk">
+                                                <!-- shows percentage and amount -->
+                                                <span class="spk-value" th:if="${spk.top4Percentage > 0}">[[${spk.top4Percentage}]] % ([[${@textFormatter.toRupiahFormat(spk.top4Amount)}]])</span>
+                                                <!-- only shows amount -->
+                                                <span class="spk-value" th:unless="${spk.top4Percentage > 0}">[[${@textFormatter.toRupiahFormat(spk.top4Amount)}]]</span>
+                                            </div>
+                                            <div class="col-sm-2 value-spk">
+                                                <span class="spk-value">[[${@textFormatter.toRupiahFormat(spk.grAmount4)}]]</span>
+                                            </div>
+                                            <div class="col-sm-4 message-spk" style="padding-left: 10px">
+                                                <span th:text="${spk.top4Message}"></span>
+                                            </div>
+                                            <div sec:authorize="hasRole('ROLE_OPERATION')" th:if="${spk.getStatus().name() == 'GR3' and spk.getEntrySheet4().equals('') and spk.getEntrySheet3() != ''}" class="col-sm-1">
+                                                <button class="btn bg-olive margin" type="button" th:onclick="|onConfirmBtnClick(4, ${spk.top4Amount})|">Confirm</button>
+                                            </div>
+                                            <div th:if="${spk.getEntrySheet4() != ''}" class="col-sm-1 message-spk">
+                                                <span class="spk-value" th:text="${spk.entrySheet4}">1000000341</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" th:if="${spk.top5Amount > 0 or spk.top5Percentage >0}">
+                                            <div class="col-sm-1">
+                                                <label class="col-sm-12 control-label">5<sup>th</sup></label>
+                                            </div>
+                                            <div class="col-sm-3 value-spk">
+                                                <!-- shows percentage and amount -->
+                                                <span class="spk-value" th:if="${spk.top5Percentage > 0}">[[${spk.top5Percentage}]] % ([[${@textFormatter.toRupiahFormat(spk.top5Amount)}]])</span>
+                                                <!-- only shows amount -->
+                                                <span class="spk-value" th:unless="${spk.top5Percentage > 0}">[[${@textFormatter.toRupiahFormat(spk.top5Amount)}]]</span>
+                                            </div>
+                                            <div class="col-sm-2 value-spk">
+                                                <span class="spk-value">[[${@textFormatter.toRupiahFormat(spk.grAmount5)}]]</span>
+                                            </div>
+                                            <div class="col-sm-4 message-spk" style="padding-left: 10px">
+                                                <span th:text="${spk.top5Message}"></span>
+                                            </div>
+                                            <div sec:authorize="hasRole('ROLE_OPERATION')" th:if="${spk.getStatus().name() == 'GR4' and spk.getEntrySheet5().equals('') and spk.getEntrySheet4() != ''}" class="col-sm-1">
+                                                <button class="btn bg-olive margin" type="button" th:onclick="|onConfirmBtnClick(5, ${spk.top5Amount})|">Confirm</button>
+                                            </div>
+                                            <div th:if="${spk.getEntrySheet5() != ''}" class="col-sm-1 message-spk">
+                                                <span class="spk-value" th:text="${spk.entrySheet5}">1000000341</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-1 payment-header">
+                                                TOTAL
+                                            </div>
+                                            <div class="col-sm-3 payment-summary text-right">
+                                                <span class="spk-value">[[${@textFormatter.toRupiahFormat(spk.amount)}]]</span>
+                                            </div>
+                                            <div class="col-sm-2 payment-summary text-right">
+                                                <span class="spk-value" id="totalGr">[[${@textFormatter.toRupiahFormat(spk.getTotalGr())}]]</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.SPK Payment Term -->
+                                    <!-- SPK Action -->
+                                    <div class="col-md-10 col-md-offset-1" align="right">
+                                        <th:block sec:authorize="hasRole('ROLE_OPERATION')">
+                                            <th:block th:if="${spk.getStatus().name() == 'SUBMITTED'}">
+                                                <div class="col-md-1 col-md-offset-11">
+                                                    <table class="table table-bordered text-center">
+                                                        <tr>
+                                                            <td>
+                                                                <button type="button" class="btn btn-block btn-danger" onclick="cancelSpk()">Cancel</button>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </th:block>
+                                            <th:block th:if="${spk.getStatus().name() == 'DONE_APPROVED' and spk.getSpkType() == 'Expense'}">
+                                                <div class="col-md-1 col-md-offset-11">
+                                                    <table class="table table-bordered text-center">
+                                                        <tr>
+                                                            <td>
+                                                                <button type="button" class="btn btn-block btn-info" onclick="onClickCreatePo()">Create PO</button>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </th:block>
+                                            <th:block th:if="${spk.getStatus().name() == 'INTERNAL_ORDER_CREATED'}">
+                                                <div class="col-md-1 col-md-offset-11">
+                                                    <table class="table table-bordered text-center">
+                                                        <tr>
+                                                            <td>
+                                                                <button type="button" class="btn btn-block btn-info" onclick="onClickCreatePo()">Create PO</button>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </th:block>
+                                            <th:block th:if="${spk.getStatus().name() == 'PURCHASE_ORDER_FAILED'}">
+                                                <div class="col-md-1 col-md-offset-11">
+                                                    <table class="table table-bordered text-center">
+                                                        <tr>
+                                                            <td>
+                                                                <button type="button" class="btn btn-block btn-warning" onclick="onClickRetryPurchaseOrder()">Retry Create PO</button>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </th:block>
+                                            <th:block th:if="${spk.getStatus().name() == 'PURCHASE_ORDER_CREATED' or spk.getStatus().name() == 'GR1' or spk.getStatus().name() == 'GR2' or spk.getStatus().name() == 'GR3' or spk.getStatus().name() == 'GR4' or spk.getStatus().name() == 'GR5'}">
+                                                <div class="col-md-2 col-md-offset-10">
+                                                    <table class="table table-bordered text-center">
+                                                        <tr>
+                                                            <td>
+                                                                <button type="button" class="btn btn-block btn-danger" onclick="onCloseRequestClick()"> <i class="fa fa-close"></i> REQUEST CLOSE</button>
+                                                            </td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-block btn-warning" onclick="onPrintClick()"> <i class="fa fa-print"></i> PRINT</button>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </th:block>
+                                            <th:block th:if="${spk.getStatus().name() == 'NEED_TO_CLOSE'}">
+                                                <div class="col-md-2 col-md-offset-10">
+                                                    <table class="table table-bordered text-center">
+                                                        <tr>
+                                                            <td>
+                                                                <button type="button" class="btn btn-block btn-danger" onclick="onCloseRequestClick()"> <i class="fa fa-close"></i> CLOSE SPK</button>
+                                                            </td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-block btn-warning" onclick="onPrintClick()"> <i class="fa fa-print"></i> PRINT</button>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </th:block>
+                                            <th:block th:if="${spk.getStatus().name() == 'INTERNAL_ORDER_CLOSE_FAILED'}">
+                                                <div class="col-md-2 col-md-offset-10">
+                                                    <table class="table table-bordered text-center">
+                                                        <tr>
+                                                            <td>
+                                                                <button type="button" class="btn bg-orange" onclick="onCloseIoInSapClick()"> <i class="fa fa-close"></i> CLOSE IO in SAP</button>
+                                                            </td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-block btn-warning" onclick="onPrintClick()"> <i class="fa fa-print"></i> PRINT</button>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </th:block>
+                                            <th:block th:if="${spk.getStatus().name() == 'TOP_CONFIRMED' or  spk.getStatus().name() == 'TOP_FAILED' or spk.getStatus().name() == 'CLOSE_REQUEST' or spk.getStatus().name() == 'CLOSE_APPROVED' or spk.getStatus().name() == 'CLOSED' or spk.getStatus().name() == 'COMPLETED' or spk.getStatus().name() == 'UPDATE_ASSET_CLASS_ID' or spk.getStatus().name() == 'CLOSE_INTERNAL_ORDER'}">
+                                                <div class="col-md-2 col-md-offset-10">
+                                                    <table class="table table-bordered text-center">
+                                                        <tr>
+                                                            <td>
+                                                                <button type="button" class="btn btn-block btn-warning" onclick="onPrintClick()"> <i class="fa fa-print"></i> PRINT</button>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </th:block>
+                                        </th:block>
+                                        <th:block sec:authorize="hasRole('ROLE_ACCOUNTANT')">
+                                            <th:block th:if="${spk.getStatus().name() == 'VERIFIED'}">
+                                                <div class="col-md-3 col-md-offset-9">
+                                                    <table class="table table-bordered text-center">
+                                                        <tr>
+                                                            <td>
+                                                                <button type="button" class="btn btn-danger margin" onclick="rejectSpk()">Reject</button>
+                                                            </td>
+                                                            <td>
+                                                                <button type="button" class="btn bg-orange margin" onclick="onClickInternalOrder()">
+                                                                    <i class="fa fa-plus"></i> Create Internal Order
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </th:block>
+                                            <th:block th:if="${spk.getStatus().name() == 'INTERNAL_ORDER_FAILED'}">
+                                                <div class="col-md-4 col-md-offset-8">
+                                                    <table class="table table-bordered text-center">
+                                                        <tr>
+                                                            <td>
+                                                                <button type="button" class="btn bg-red margin" onclick="rejectSpk()">Reject</button>
+                                                            </td>
+                                                            <td>
+                                                                <button type="button" class="btn bg-green margin" onclick="onClickChangeAssetNumber()">
+                                                                    <i class="fa fa-edit"></i> Change Asset Number
+                                                                </button>
+                                                            </td>
+                                                            <td>
+                                                                <button type="button" class="btn bg-orange margin" onclick="onClickRetryInternalOrder()">
+                                                                    <i class="fa fa-mail-reply-all"></i> Retry
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </th:block>
+                                        </th:block>
+                                        <th:block th:if="${spkAction} == 'ApproveOrReject'">
+                                            <div class="col-md-2 col-md-offset-10">
+                                                <table class="table table-bordered text-center">
+                                                    <tr>
+                                                        <td>
+                                                            <button type="button" class="btn btn-block btn-danger" onclick="rejectSpk()">Reject</button>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-block btn-success" onclick="approveSpk()">Approve</button>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </th:block>
+                                        <th:block th:if="${spkAction} == 'DoneApproveOrReject'">
+                                            <div class="col-md-2 col-md-offset-10">
+                                                <table class="table table-bordered text-center">
+                                                    <tr>
+                                                        <td>
+                                                            <button type="button" class="btn btn-block btn-danger" onclick="rejectSpk()">Reject.</button>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-block btn-success" onclick="doneapproveSpk()">Approve.</button>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </th:block>
+                                        <th:block th:if="${spkAction} == 'VerifyOrReject'">
+                                            <div class="col-md-3 col-md-offset-9">
+                                                <table class="table table-bordered text-center">
+                                                    <tr>
+                                                        <td>
+                                                            <button type="button" class="btn btn-block btn-danger" onclick="rejectSpk()">Reject</button>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-block btn-warning" onclick="onChangeAssetClassClick()">Change Asset Class</button>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-block btn-success" onclick="verifySpk()">Verify</button>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </th:block>
+                                        <th:block th:if="${spkAction} == 'CloseApprove'">
+                                            <div class="col-md-1 col-md-offset-10">
+                                                <table class="table table-bordered text-center">
+                                                    <tr>
+                                                        <td>
+                                                            <button type="button" class="btn btn-block btn-success" onclick="onApproveCloseClick()">Approve Close Request</button>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </th:block>
+                                    </div>
+                                    <!-- /. SPK Action-->
+                                    <!-- SPK History -->
+                                    <div class="col-md-7 col-md-offset-1">
+                                        <!-- The time line -->
+                                        <h2>SPK's History</h2>
+                                        <ul class="timeline">
+                                            <li th:each="spkHistory: ${spkHistories}">
+                                                <th:block th:switch="${spkHistory.status.name()}">
+                                                    <!-- Status : Submitted-->
+                                                    <th:block th:case="'SUBMITTED'">
+                                                        <i class="fa fa-file-text-o bg-green"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time" th:inline="text"><i class="fa fa-clock-o"></i> [[${spkHistory.dataTimeStamp}]]</span>
+                                                            <h3 class="timeline-header"><span class="text-green"><b>Submitted</b></span> <span th:text="${'by ' + spkHistory.userName}"></span></h3>
+                                                        </div>
+                                                    </th:block>
+                                                    <!-- /.Status : Submitted-->
+                                                    <!-- Status : VERIFIED-->
+                                                    <th:block th:case="'VERIFIED'">
+                                                        <i class="fa fa-check bg-blue"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time" th:inline="text"><i class="fa fa-clock-o"></i> [[${spkHistory.dataTimeStamp}]]</span>
+                                                            <h3 class="timeline-header"><span class="text-blue"><b>Verified</b></span> <span th:text="${'by ' + spkHistory.userName}"></span></h3>
+                                                            <div class="timeline-body">
+                                                                <span th:text="${spkHistory.spkNote}"> Verified Note</span>
+                                                            </div>
+                                                        </div>
+                                                    </th:block>
+                                                    <!-- /.Status : VERIFIED-->
+                                                    <!-- /.Status : UPDATED-->
+                                                    <th:block th:case="'UPDATED'">
+                                                        <i class="fa fa-file-text-o bg-green"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time" th:inline="text"><i class="fa fa-clock-o"></i> [[${spkHistory.dataTimeStamp}]]</span>
+                                                            <h3 class="timeline-header"><span class="text-green"><b>Updated</b></span> <span th:text="${'by ' + spkHistory.userName}"></span></h3>
+                                                        </div>
+                                                    </th:block>
+                                                    <!-- /.Status : UPDATED-->
+                                                    <!-- Status : APPROVED-->
+                                                    <th:block th:case="'APPROVED'">
+                                                        <i class="fa fa-check bg-blue-active"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time" th:inline="text"><i class="fa fa-clock-o"></i> [[${spkHistory.dataTimeStamp}]]</span>
+                                                            <h3 class="timeline-header"><span class="text-blue"><b>Approved</b></span> <span th:text="${'by ' + spkHistory.userName}"></span></h3>
+                                                        </div>
+                                                    </th:block>
+                                                    <!-- /.Status : APPROVED-->
+                                                    <!-- Status : DONE APPROVED-->
+                                                    <th:block th:case="'DONE_APPROVED'">
+                                                        <i class="fa fa-check bg-blue-active"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time" th:inline="text"><i class="fa fa-clock-o"></i> [[${spkHistory.dataTimeStamp}]]</span>
+                                                            <h3 class="timeline-header"><span class="text-blue"><b>Done Approved</b></span> <span th:text="${'by ' + spkHistory.userName}"></span></h3>
+                                                        </div>
+                                                    </th:block>
+                                                    <!-- /.Status : DONE APPROVED-->
+                                                    <!-- Status : CANCELED-->
+                                                    <th:block th:case="'CANCELED'">
+                                                        <i class="fa fa-exclamation-triangle bg-yellow"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time" th:inline="text"><i class="fa fa-clock-o"></i> [[${spkHistory.dataTimeStamp}]]</span>
+                                                            <h3 class="timeline-header"><span class="text-yellow"><b>Canceled</b></span> <span th:text="${'by ' + spkHistory.userName}"></span></h3>
+                                                            <div class="timeline-body">
+                                                                <span th:text="${spkHistory.spkNote}"> Rejected Note</span>
+                                                            </div>
+                                                        </div>
+                                                    </th:block>
+                                                    <!-- /.Status : CANCELED-->
+                                                    <!-- Status : REJECTED-->
+                                                    <th:block th:case="'REJECTED'">
+                                                        <i class="fa fa-close bg-red"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time" th:inline="text"><i class="fa fa-clock-o"></i> [[${spkHistory.dataTimeStamp}]]</span>
+                                                            <h3 class="timeline-header"><span class="text-red"><b>Rejected</b></span> <span th:text="${'by ' + spkHistory.userName}"></span></h3>
+                                                            <div class="timeline-body">
+                                                                <span th:text="${spkHistory.spkNote}"> Rejected Note</span>
+                                                            </div>
+                                                        </div>
+                                                    </th:block>
+                                                    <!-- /.Status : REJECTED-->
+                                                    <!-- Status : INTERNAL_ORDER_CREATED-->
+                                                    <th:block th:case="'INTERNAL_ORDER_CREATED'">
+                                                        <i class="fa  fa-check bg-blue"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time" th:inline="text"><i class="fa fa-clock-o"></i> [[${spkHistory.dataTimeStamp}]]</span>
+                                                            <h3 class="timeline-header"><span class="text-blue"><b>Internal Order is Created</b></span> <span th:text="${'by ' + spkHistory.userName}"></span></h3>
+                                                            <div class="timeline-body">
+                                                                <span th:text="${spkHistory.spkNote}"> Internal Order Message</span>
+                                                            </div>
+                                                        </div>
+                                                    </th:block>
+                                                    <!-- /.Status : INTERNAL_ORDER_CREATED-->
+                                                    <!-- Status : INTERNAL_ORDER_FAILED-->
+                                                    <th:block th:case="'INTERNAL_ORDER_FAILED'">
+                                                        <i class="fa fa-exclamation bg-red"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time" th:inline="text"><i class="fa fa-clock-o"></i> [[${spkHistory.dataTimeStamp}]]</span>
+                                                            <h3 class="timeline-header"><span class="text-red"><b>Internal Order Failed</b></span> <span th:text="${'by ' + spkHistory.userName}"></span></h3>
+                                                            <div class="timeline-body">
+                                                                <span th:text="${spkHistory.spkNote}"> Internal Order Failed Message</span>
+                                                            </div>
+                                                        </div>
+                                                    </th:block>
+                                                    <!-- /.Status : INTERNAL_ORDER_FAILED-->
+                                                    <!-- Status : PURCHASE_ORDER_CREATED-->
+                                                    <th:block th:case="'PURCHASE_ORDER_CREATED'">
+                                                        <i class="fa  fa-check bg-blue"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time" th:inline="text"><i class="fa fa-clock-o"></i> [[${spkHistory.dataTimeStamp}]]</span>
+                                                            <h3 class="timeline-header"><span class="text-blue"><b>Purchase Order is Created</b></span> <span th:text="${'by ' + spkHistory.userName}"></span></h3>
+                                                            <div class="timeline-body">
+                                                                <span th:text="${spkHistory.spkNote}"> Purchase Order Message</span>
+                                                            </div>
+                                                        </div>
+                                                    </th:block>
+                                                    <!-- /.Status : PURCHASE_ORDER_CREATED-->
+                                                    <!-- Status : PURCHASE_ORDER_FAILED-->
+                                                    <th:block th:case="'PURCHASE_ORDER_FAILED'">
+                                                        <i class="fa fa-exclamation bg-red"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time" th:inline="text"><i class="fa fa-clock-o"></i> [[${spkHistory.dataTimeStamp}]]</span>
+                                                            <h3 class="timeline-header"><span class="text-red"><b>Purchase Order is Failed</b></span> <span th:text="${'by ' + spkHistory.userName}"></span></h3>
+                                                            <div class="timeline-body">
+                                                                <span th:text="${spkHistory.spkNote}"> Purchase Order Failed Message</span>
+                                                            </div>
+                                                        </div>
+                                                    </th:block>
+                                                    <!-- /.Status : PURCHASE_ORDER_FAILED-->
+                                                    <!-- Status : GR1, GR2, GR3, GR4, GR5-->
+                                                    <th:block th:case="'GR1'">
+                                                        <i class="fa   fa-check bg-navy-active"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time" th:inline="text"><i class="fa fa-clock-o"></i> [[${spkHistory.dataTimeStamp}]]</span>
+                                                            <h3 class="timeline-header"><span class="text-navy"><b>Term of Payment is Confirmed </b></span> <span th:text="${'by ' + spkHistory.userName}"></span></h3>
+                                                            <div class="timeline-body">
+                                                                <span th:text="${spkHistory.spkNote}"> Payment 1 is confirmed</span>
+                                                            </div>
+                                                        </div>
+                                                    </th:block>
+                                                    <th:block th:case="'GR2'">
+                                                        <i class="fa   fa-check bg-navy-active"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time" th:inline="text"><i class="fa fa-clock-o"></i> [[${spkHistory.dataTimeStamp}]]</span>
+                                                            <h3 class="timeline-header"><span class="text-navy"><b>Term of Payment is Confirmed </b></span> <span th:text="${'by ' + spkHistory.userName}"></span></h3>
+                                                            <div class="timeline-body">
+                                                                <span th:text="${spkHistory.spkNote}"> Payment 2 is confirmed</span>
+                                                            </div>
+                                                        </div>
+                                                    </th:block>
+                                                    <th:block th:case="'GR3'">
+                                                        <i class="fa   fa-check bg-navy-active"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time" th:inline="text"><i class="fa fa-clock-o"></i> [[${spkHistory.dataTimeStamp}]]</span>
+                                                            <h3 class="timeline-header"><span class="text-navy"><b>Term of Payment is Confirmed </b></span> <span th:text="${'by ' + spkHistory.userName}"></span></h3>
+                                                            <div class="timeline-body">
+                                                                <span th:text="${spkHistory.spkNote}"> Payment 3 is confirmed</span>
+                                                            </div>
+                                                        </div>
+                                                    </th:block>
+                                                    <th:block th:case="'GR4'">
+                                                        <i class="fa   fa-check bg-navy-active"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time" th:inline="text"><i class="fa fa-clock-o"></i> [[${spkHistory.dataTimeStamp}]]</span>
+                                                            <h3 class="timeline-header"><span class="text-navy"><b>Term of Payment is Confirmed </b></span> <span th:text="${'by ' + spkHistory.userName}"></span></h3>
+                                                            <div class="timeline-body">
+                                                                <span th:text="${spkHistory.spkNote}"> Payment 4 is confirmed</span>
+                                                            </div>
+                                                        </div>
+                                                    </th:block>
+                                                    <th:block th:case="'GR5'">
+                                                        <i class="fa   fa-check bg-navy-active"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time" th:inline="text"><i class="fa fa-clock-o"></i> [[${spkHistory.dataTimeStamp}]]</span>
+                                                            <h3 class="timeline-header"><span class="text-navy"><b>Term of Payment is Confirmed </b></span> <span th:text="${'by ' + spkHistory.userName}"></span></h3>
+                                                            <div class="timeline-body">
+                                                                <span th:text="${spkHistory.spkNote}"> Payment 5 is confirmed</span>
+                                                            </div>
+                                                        </div>
+                                                    </th:block>
+                                                    <!-- Status : GR1, GR2, GR3, GR4, GR5-->
+                                                    <!-- Status : TOP_FAILED-->
+                                                    <th:block th:case="'TOP_FAILED'">
+                                                        <i class="fa fa-exclamation bg-red"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time" th:inline="text"><i class="fa fa-clock-o"></i> [[${spkHistory.dataTimeStamp}]]</span>
+                                                            <h3 class="timeline-header"><span class="text-red"><b>Payment Confirmation is Failed</b></span> <span th:text="${'by ' + spkHistory.userName}"></span></h3>
+                                                            <div class="timeline-body">
+                                                                <span th:text="${spkHistory.spkNote}"> Purchase Order Failed Message</span>
+                                                            </div>
+                                                        </div>
+                                                    </th:block>
+                                                    <!-- /.Status : TOP_FAILED-->
+                                                    <!-- Status : COMPLETED-->
+                                                    <th:block th:case="'COMPLETED'">
+                                                        <i class="fa   fa-check bg-yellow-gradient"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time" th:inline="text"><i class="fa fa-clock-o"></i> [[${spkHistory.dataTimeStamp}]]</span>
+                                                            <h3 class="timeline-header"><span class="text-navy"><b>SPK is Completed </b></span></h3>
+                                                        </div>
+                                                    </th:block>
+                                                    <!-- /.Status : COMPLETED-->
+                                                    <!-- Status : CLOSE_REQUEST-->
+                                                    <th:block th:case="'CLOSE_REQUEST'">
+                                                        <i class="fa fa-send bg-olive"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time" th:inline="text"><i class="fa fa-clock-o"></i> [[${spkHistory.dataTimeStamp}]]</span>
+                                                            <h3 class="timeline-header"><span th:text="${spkHistory.userName}"></span><span class="text-navy"><b> sent Close Request</b></span> </h3>
+                                                            <div class="timeline-body">
+                                                                <span>Total Actual Amount is  [[${@textFormatter.toRupiahFormat(spk.actualAmount)}]]</span><br/>
+                                                                <span id="rsnSpk" th:text="${spkHistory.spkNote}"> Reason</span>
+                                                            </div>
+                                                        </div>
+                                                    </th:block>
+                                                    <!-- /.Status : CLOSE_REQUEST-->
+                                                    <!-- Status : NEED_TO_CLOSE-->
+                                                    <th:block th:case="'NEED_TO_CLOSE'">
+                                                        <i class="fa fa-warning bg-yellow"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time" th:inline="text"><i class="fa fa-clock-o"></i> [[${spkHistory.dataTimeStamp}]]</span>
+                                                            <h3 class="timeline-header"><span class="text-navy"><b>SPK need to close </b></span></h3>
+                                                            <div class="timeline-body">
+                                                                <span th:text="${spkHistory.spkNote}"> Reason</span>
+                                                            </div>
+                                                        </div>
+                                                    </th:block>
+                                                    <!-- /.Status : NEED_TO_CLOSE-->
+                                                    <!-- Status : CLOSE_APPROVED-->
+                                                    <th:block th:case="'CLOSE_APPROVED'">
+                                                        <i class="fa fa-check bg-teal"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time" th:inline="text"><i class="fa fa-clock-o"></i> [[${spkHistory.dataTimeStamp}]]</span>
+                                                            <h3 class="timeline-header"><span class="text-navy"><b>Close Request approved </b></span> <span th:text="${'by ' + spkHistory.userName}"></span></h3>
+                                                        </div>
+                                                    </th:block>
+                                                    <!-- /.Status : CLOSE_APPROVED-->
+                                                    <!-- Status : CLOSED-->
+                                                    <th:block th:case="'CLOSED'">
+                                                        <i class="fa fa-archive bg-olive"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time" th:inline="text"><i class="fa fa-clock-o"></i> [[${spkHistory.dataTimeStamp}]]</span>
+                                                            <h3 class="timeline-header"><span class="text-navy"><b>SPK is closed </b></span></h3>
+                                                        </div>
+                                                    </th:block>
+                                                    <!-- /.Status : CLOSED-->
+                                                    <!-- Status : UPDATE_ASSET_CLASS_ID-->
+                                                    <th:block th:case="'UPDATE_ASSET_CLASS_ID'">
+                                                        <i class="fa fa-info bg-teal"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time" th:inline="text"><i class="fa fa-clock-o"></i> [[${spkHistory.dataTimeStamp}]]</span>
+                                                            <h3 class="timeline-header"><span class="text-navy"><b>Asset Class is Changed </b></span> <span th:text="${'by ' + spkHistory.userName}"></span></h3>
+                                                            <div class="timeline-body">
+                                                                <span th:text="${spkHistory.spkNote}"> Reason</span>
+                                                            </div>
+                                                        </div>
+                                                    </th:block>
+                                                    <!-- /.Status : UPDATE_ASSET_CLASS_ID-->
+                                                    <!-- Status : INTERNAL_ORDER_CLOSE_FAILED -->
+                                                    <th:block th:case="'INTERNAL_ORDER_CLOSE_FAILED'">
+                                                        <i class="fa fa-exclamation bg-red"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time" th:inline="text"><i class="fa fa-clock-o"></i> [[${spkHistory.dataTimeStamp}]]</span>
+                                                            <h3 class="timeline-header"><span class="text-red"><b>Close Internal Order is Failed</b></span> </span> <span th:text="${'triggered by ' + spkHistory.userName}"></span></h3>
+                                                            <div class="timeline-body">
+                                                                <span th:text="${spkHistory.spkNote}"> Internal Order Close Failed Message</span>
+                                                            </div>
+                                                        </div>
+                                                    </th:block>
+                                                    <!-- /.Status : INTERNAL_ORDER_CLOSE_FAILED -->
+                                                </th:block>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-clock-o bg-gray"></i>
+                                            </li>
+                                        </ul>
+                                        <!-- /.The time line -->
+                                    </div>
+                                    <!-- /.SPK History -->
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /.Main Content -->
+        </div>
+        <!--/.content-wrapper -->
+
+        <th:block th:insert="fragments/footer.html::footer">
+        </th:block>
+    </div>
+
+    <th:block th:include="fragments/footer.html::main-scripts"></th:block>
+
+    <!-- Sweet Alert 2 Script -->
+    <script th:src="@{/sweet_alert2/sweetalert2.min.js}"></script>
+    <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
+    <script th:src="@{/sweet_alert2/sweetalert2_optional.js}"></script>
+
+    <!-- Auto numeric -->
+    <script th:src="@{/scripts/auto_numeric/autonumeric4.js}"></script>
+
+    <!-- Auto numeric -->
+    <script th:src="@{/scripts/auto_numeric/rupiah-format-input.js}"></script>
+
+    <!-- SPK by ID script -->
+    <script th:src="@{/scripts/spk/spk-by-id.js}"></script>
+    <script th:src="@{/scripts/spk/spk-by-id-internal-order.js}"></script>
+    <script th:src="@{/scripts/spk/spk-by-id-purchase-order.js}"></script>
+    <script th:src="@{/scripts/spk/spk-by-id-entry-sheet.js}"></script>
+    <script th:src="@{/scripts/spk/spk-by-id-asset-class.js} "></script>
+</body>
+</html>

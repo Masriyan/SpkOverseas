@@ -1,0 +1,81 @@
+.form-horizontal .control-label {
+    padding-top: 7px;
+    margin-bottom: 0;
+    text-align: left;
+    color: #3399ff;
+    font-size: small;
+}
+
+.form-horizontal .value-spk {
+    padding-top: 7px;
+    margin-bottom: 0;
+    margin-left: 10px;
+    text-align: right;
+    color: #000000;
+    font-size: medium;
+    background-color: #f4f4f4;
+    border-bottom: 2px solid #808080;
+}
+
+.form-horizontal .message-spk {
+    padding-top: 7px;
+    margin-bottom: 0;
+    margin-left: 10px;
+    text-align: left;
+    color: #000000;
+    font-size: medium;
+    background-color: #f4f4f4;
+    border-bottom: 2px solid #808080;
+}
+
+.form-horizontal .payment-header{
+    text-align: center;
+    font-size: medium;
+    font-weight: bold;
+    color: #000000;
+}
+
+.form-horizontal .payment-summary{
+    padding-top: 7px;
+    margin-bottom: 0;
+    margin-left: 10px;
+    font-size: medium;
+    font-weight: bold;
+    background-color: rgba(0, 128, 128, 0.2);
+    color: rgba(0, 128, 128, 1);
+    border-bottom: 2px solid rgba(0, 128, 128, 1);
+}
+
+
+
+.timeline > li > .timeline-item {
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    border-radius: 3px;
+    margin-top: 0;
+    background: #ecf0f5;
+    color: #444;
+    margin-left: 60px;
+    margin-right: 15px;
+    padding: 0;
+    position: relative;
+}
+
+.swal2-popup {
+    font-size: 1.6rem !important;
+}
+
+.header-line{
+    display: block;
+    border-width: 2px;
+    background-color: #808080;
+}
+
+#spkDescription{
+    color: #0f0f0f;
+    font-weight: bold;
+}
+
+#spkId{
+    color: #808080;
+}

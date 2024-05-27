@@ -1,0 +1,16 @@
+#table-spk th{
+    text-align: center;
+}
+
+#table-spk thead{
+    background-color: #f39c12;
+    color: #ffffff;
+}
+
+#table-spk tbody tr:hover{
+    cursor: pointer;
+}
+
+#more-info:hover{
+    cursor: pointer;
+}

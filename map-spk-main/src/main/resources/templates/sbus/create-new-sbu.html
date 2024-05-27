@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>SPK | Create New SBU</title>
+
+    <!-- Sweet Alert 2 -->
+    <link rel="stylesheet" th:href="@{/sweet_alert2/sweetalert2.min.css}">
+
+    <th:block th:include="fragments/menu.html::main-style">
+    </th:block>
+
+    <!-- Custom Create New User Style -->
+    <link rel="stylesheet" th:href="@{/css/companies/create-new-company.css}">
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+<!--/*@thymesVar id="companies" type="id.co.map.spk.entities.CompanyEntity"*/-->
+<!--/*@thymesVar id="roles" type="id.co.map.spk.entities.RoleEntity"*/-->
+<div class="wrapper">
+    <th:block th:insert="fragments/menu.html::header-menu">
+    </th:block>
+    <th:block th:insert="fragments/menu.html::left-side-menu">
+    </th:block>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Main Content -->
+        <section class="content">
+            <div class="box box-default">
+                <form onsubmit="return onSubmitSbu();">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">New SBU Form</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-3">
+                                <!-- Processing Group -->
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> SBU Code:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="sbuCode" maxlength="5" required>
+                                    </div>
+                                </div>
+                                <!-- /.Processing Group -->
+                                <!-- Company Name -->
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> SBU Name:</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="sbuName" maxlength="100" required>
+                                    </div>
+                                </div>
+                                <!-- /.Company Name -->
+                                <!-- Company -->
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Company:</label>
+                                    <select class="form-control" id="companyid" required>
+                                        <option value="">-Select  Company-</option>
+                                        <option th:each="comp : ${companies}" th:value="${comp.companyId}" th:text="${comp.companyId}+' - '+ ${comp.companyName}">0100 - Mitra Adiperkasa</option>
+                                    </select>
+                                </div>
+                                <!-- /.Company -->
+                                <!-- Approval Rule -->
+                                <div class="form-group">
+                                    <label><span style="color:red;">*</span> Approval Rule:</label>
+                                    <select class="form-control" id="approvalRule" required>
+                                        <option value="">-Select  Rule-</option>
+                                        <option th:each="rule : ${approvalRules}" th:value="${rule.approvalRulesId}" th:text="${rule.approvalRulesId}">RULE0001</option>
+                                    </select>
+                                </div>
+                                <!-- /.Approval Rule -->
+                                <!-- Letter Head
+                                <div class="form-group">
+                                    <div class="col-sm-12 well well-sm no-shadow">
+                                        <label for="letterHead" class="col-sm-12 control-label"><span style="color:red;">*</span>Letter Head: </label>
+                                        <div class="col-sm-12">
+                                            <input type="file" id="letterHead" accept="image/*" required/>
+                                            <p class="help-block">*) Letter Head file in PNG/JPG/JPEG format.</p>
+                                        </div>
+                                    </div>
+                                </div>-->
+                                <!-- /.Letter Head-->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <div class="col-md-10 col-md-offset-1">
+                            <button type="submit" class="btn btn-warning pull-right">Submit</button>
+                        </div>
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
+            </div>
+        </section>
+        <!-- /.Main Content -->
+    </div>
+    <!--/.content-wrapper -->
+
+    <th:block th:insert="fragments/footer.html::footer">
+    </th:block>
+</div>
+
+<th:block th:include="fragments/footer.html::main-scripts">
+</th:block>
+
+<!-- Sweet Alert 2 Script -->
+<script th:src="@{/sweet_alert2/sweetalert2.min.js}"></script>
+<!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
+<script th:src="@{/sweet_alert2/sweetalert2_optional.js}"></script>
+
+<!-- Menu Activator script -->
+<script th:src="@{/scripts/utils/menu-activator.js}"></script>
+
+<!-- Create new User script -->
+<script th:src="@{/scripts/sbu/create-new-sbu.js}"></script>
+
+</body>
+</html>

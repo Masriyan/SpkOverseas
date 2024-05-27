@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>SPK | List Of Companies</title>
+
+    <th:block th:include="fragments/menu.html::main-style">
+    </th:block>
+
+    <!-- Sweet Alert 2 -->
+    <link rel="stylesheet" th:href="@{/sweet_alert2/sweetalert2.min.css}">
+
+    <!-- DataTables -->
+    <link rel="stylesheet" th:href="@{/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css}">
+
+    <!-- Custom List Of Companies Style -->
+    <link rel="stylesheet" th:href="@{/css/companies/list-of-companies.css}">
+</head>
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+<div class="wrapper">
+    <th:block th:insert="fragments/menu.html::header-menu">
+    </th:block>
+    <th:block th:insert="fragments/menu.html::left-side-menu">
+    </th:block>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Main Content -->
+        <section class="content">
+            <!-- SPK Filter -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Filter</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label for="filterCompanyId" class="col-sm-12 control-label">Company Id: </label>
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="filterCompanyId" maxlength="5">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="filterCompanyName" class="col-sm-12 control-label">Company Name: </label>
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="filterCompanyName" maxlength="225">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="filterSbuId" class="col-sm-12 control-label">Sbu : </label>
+                                    <div class="col-sm-12">
+                                        <select class="form-control" id="filterSbuId">
+                                            <option value="">-Select Sbu-</option>
+                                            <option th:each="sbu : ${sbus}" th:value="${sbu.sbuId}" th:text="${sbu.sbuCode}+' - '+${sbu.sbuDesc}">TL</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12" align="right" style="margin-top: 15px;">
+                                    <div class="col-sm-3 col-sm-offset-9">
+                                        <table class="table table-bordered text-center">
+                                            <tbody><tr>
+                                                <td>
+                                                    <button type="button" class="btn bg-maroon" onclick="onClearClick()">
+                                                        <i class="fa fa-eraser"></i>  <b>CLEAR</b>
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-block btn-warning" onclick="onFilterCompanyClick()">
+                                                        <i class="fa fa-search"></i>  <b>FILTER</b>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.SPK Filter -->
+
+            <!-- SPK List -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">List of Companies</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-striped" id="company-list-table">
+                                        <thead>
+                                        <tr>
+                                            <th>Company Id</th>
+                                            <th>Processing Group</th>
+                                            <th>Company Name</th>
+                                            <th>SBU</th>
+                                            <th>COA</th>
+                                            <th>Tax Id</th>
+                                            <th>Address 1</th>
+                                            <th>Address 2</th>
+                                            <th>City</th>
+                                            <th>Rule</th>
+                                            <th>Country Name</th>
+                                            <th>Command</th>
+                                        </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.SPK List -->
+        </section>
+        <!-- /.Main Content -->
+    </div>
+    <!--/.content-wrapper -->
+
+    <th:block th:insert="fragments/footer.html::footer">
+    </th:block>
+</div>
+
+    <th:block th:include="fragments/footer.html::main-scripts"></th:block>
+
+    <!-- Sweet Alert 2 Script -->
+    <script th:src="@{/sweet_alert2/sweetalert2.min.js}"></script>
+    <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
+    <script th:src="@{/sweet_alert2/sweetalert2_optional.js}"></script>
+
+    <!-- DataTables -->
+    <script th:src="@{/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
+
+    <!-- Menu Activator script -->
+    <script th:src="@{/scripts/utils/menu-activator.js}"></script>
+
+    <!-- List of SPK script -->
+    <script th:src="@{/scripts/companies/list-of-companies.js}"></script>
+
+</body>
+</html>

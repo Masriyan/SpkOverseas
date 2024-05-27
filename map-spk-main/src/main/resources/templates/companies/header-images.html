@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Header SBU</title>
+</head>
+<body style="background-color:black;">
+    <img th:src="@{/compHeaderImagePath/{headerImage}(headerImage=${imgheader})}" class="letter-head-img"/>
+</body>
+</html>

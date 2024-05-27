@@ -1,0 +1,38 @@
+.swal2-popup {
+    font-size: 1.6rem !important;
+}
+
+.table-striped th{
+    text-align: center;
+}
+
+.table-striped tbody tr:hover{
+    cursor: pointer;
+    background-color: #ffd394 !important;
+}
+
+.table-striped thead{
+    background-color: #343a40;
+    color: #ffffff;
+}
+
+#table-filter-vendor thead{
+    background-color: #3D9970;
+    color: #ffffff;
+}
+
+#table-filter-vendor tbody tr:hover{
+    cursor: pointer;
+    background-color: #99badd !important;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+#filterVendorId:hover{
+    cursor: pointer;
+}
+
+.modal-dialog {
+    width: 800px;
+    margin: 30px auto;
+}

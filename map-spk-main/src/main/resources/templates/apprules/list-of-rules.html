@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>SPK | List Of Approval Rules</title>
+
+    <th:block th:include="fragments/menu.html::main-style">
+    </th:block>
+
+    <!-- Sweet Alert 2 -->
+    <link rel="stylesheet" th:href="@{/sweet_alert2/sweetalert2.min.css}">
+
+    <!-- DataTables -->
+    <link rel="stylesheet" th:href="@{/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css}">
+
+    <!-- Custom List Of Companies Style -->
+    <link rel="stylesheet" th:href="@{/css/companies/list-of-companies.css}">
+</head>
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+<div class="wrapper">
+    <th:block th:insert="fragments/menu.html::header-menu">
+    </th:block>
+    <th:block th:insert="fragments/menu.html::left-side-menu">
+    </th:block>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Main Content -->
+        <section class="content">
+            <!-- SPK Filter -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Filter</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label for="filterRuleId" class="col-sm-12 control-label">Rule Id: </label>
+                                    <div class="col-sm-12">
+                                        <!-- <input type="text" class="form-control" id="filterRuleId" maxlength="10"> -->
+                                        <select class="form-control" id="filterRuleId">
+                                            <option value="">-Select Rule Id-</option>
+                                            <option th:each="rule : ${rules}" th:value="${rule.approvalRulesId}" th:text="${rule.approvalRulesId}">RULE0001</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="filterAssetType" class="col-sm-12 control-label">Asset Type: </label>
+                                    <div class="col-sm-12">
+                                        <!--  <input type="text" class="form-control" id="filterAssetType" maxlength="225"> -->
+                                        <select class="form-control" id="filterAssetType">
+                                            <option value="">-Select Asset Type-</option>
+                                            <option value="CONTRACTOR" text="CONTRACTOR">CONTRACTOR</option>
+                                            <option value="IT PROJECT" text="IT PROJECT">IT PROJECT</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="filterPoType" class="col-sm-12 control-label">Po Type: </label>
+                                    <div class="col-sm-12">
+                                        <!--  <input type="text" class="form-control" id="filterPoType" maxlength="225"> -->
+                                        <select class="form-control" id="filterPoType">
+                                            <option value="">-Select Po Type-</option>
+                                            <option value="APPROVAL" text="APPROVAL">APPROVAL</option>
+                                            <option value="CLOSING" text="CLOSING">CLOSING</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="filterAppLevel" class="col-sm-12 control-label">Approval Level: </label>
+                                    <div class="col-sm-12">
+                                        <!--  <input type="text" class="form-control" id="filterAppLevel" maxlength="225">-->
+                                        <select class="form-control" id="filterAppLevel">
+                                            <option value="">-Select Level-</option>
+                                            <option value="1" text="1">1</option>
+                                            <option value="2" text="2">2</option>
+                                            <option value="3" text="3">3</option>
+                                            <option value="4" text="4">4</option>
+                                            <option value="5" text="5">5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="filterAppLevel" class="col-sm-12 control-label">Role: </label>
+                                    <div class="col-sm-12">
+                                        <!-- <input type="text" class="form-control" id="filterRole" maxlength="225"> -->
+                                        <select class="form-control" id="filterRole">
+                                            <option value="">-Select Role-</option>
+                                            <option th:each="role : ${roles}" th:value="${role.roleId}" th:text="${role.roleName}">ROLE_ADMIN</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="filterMinAmt" class="col-sm-12 control-label">Min Amount: </label>
+                                    <div class="col-sm-12">
+                                        <!-- <input type="text" class="form-control" id="filterMinAmt" maxlength="225"> -->
+                                        <select class="form-control" id="filterMinAmt">
+                                            <option value="">-Select Min Amount-</option>
+                                            <option value="1.00" text="1.00">1.00</option>
+                                            <option value="200000000.00" text="200000000.00">200000000.00</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="filterMaxAmt" class="col-sm-12 control-label">Max Amount: </label>
+                                    <div class="col-sm-12">
+                                        <!--  <input type="text" class="form-control" id="filterMaxAmt" maxlength="225"> -->
+                                        <select class="form-control" id="filterMaxAmt">
+                                            <option value="">-Select Max Amount-</option>
+                                            <option value="199999999.00" text="199999999.00">199999999.00</option>
+                                            <option value="999999999999.00" text="999999999999.00">999999999999.00</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12" align="right" style="margin-top: 15px;">
+                                    <div class="col-sm-3 col-sm-offset-9">
+                                        <table class="table table-bordered text-center">
+                                            <tbody><tr>
+                                                <td>
+                                                    <button type="button" class="btn bg-maroon" onclick="onClearClick()">
+                                                        <i class="fa fa-eraser"></i>  <b>CLEAR</b>
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-block btn-warning" onclick="onFilterSbuClick()">
+                                                        <i class="fa fa-search"></i>  <b>FILTER</b>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.SPK Filter -->
+
+            <!-- SPK List -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">List of Approval Rules</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-striped" id="apprule-list-table">
+                                        <thead>
+                                        <tr>
+                                            <th>Rule Id</th>
+                                            <th>Asset Type</th>
+                                            <th>Po Type</th>
+                                            <th>Approval Level</th>
+                                            <th>Role</th>
+                                            <th>Min Amount</th>
+                                            <th>Max Amount</th>
+                                            <th>Country Name</th>
+                                            <th>Command</th>
+                                        </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.SPK List -->
+        </section>
+        <!-- /.Main Content -->
+    </div>
+    <!--/.content-wrapper -->
+
+    <th:block th:insert="fragments/footer.html::footer">
+    </th:block>
+</div>
+
+<th:block th:include="fragments/footer.html::main-scripts"></th:block>
+
+<!-- Sweet Alert 2 Script -->
+<script th:src="@{/sweet_alert2/sweetalert2.min.js}"></script>
+<!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
+<script th:src="@{/sweet_alert2/sweetalert2_optional.js}"></script>
+
+<!-- DataTables -->
+<script th:src="@{/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
+
+<!-- Menu Activator script -->
+<script th:src="@{/scripts/utils/menu-activator.js}"></script>
+
+<!-- List of SPK script -->
+<script th:src="@{/scripts/apprule/list-of-rules.js}"></script>
+
+</body>
+</html>
